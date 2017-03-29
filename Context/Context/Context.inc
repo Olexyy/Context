@@ -9,7 +9,7 @@ class Context {
     public $Controller; // Controller class: is defined by reflection.
     public $Model;      // Model is filled by controller.
     public $Session;    // Session variables class.
-    public $Messages;   // array that can be used in template for system messages
+    public $Messages;   // Array that can be used in template for system messages.
     public $DB;         // todo: implement standard mysqli class.
     public $User;       // todo: implement User depends on session and DB.
     // Singleton handler.
@@ -21,8 +21,8 @@ class Context {
     }
     // Constructor.
     private function __construct() {
-        Context::$Instance = $this;
         $this->Messages = array();
+        $this->Model = array();
         $this->Settings = new Settings();
         $this->Router = new Router();
         $this->Session = new SessionPHP();
