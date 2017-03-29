@@ -8,10 +8,10 @@ class Context {
     public $Router;     // Class that defines controller, it's method and holds get/post vars.
     public $Controller; // Controller class: is defined by reflection.
     public $Model;      // Model is filled by controller.
-    public $DB;         // todo: implement For now standard mysqli class.
-    public $Session;    // todo: implement Session variables class.
-    public $User;       // todo: implement User depends on session.
+    public $Session;    // Session variables class.
     public $Messages;   // array that can be used in template for system messages
+    public $DB;         // todo: implement standard mysqli class.
+    public $User;       // todo: implement User depends on session and DB.
     // Singleton handler.
     static public function Application(){
         if(!isset(self::$Instance)) {
@@ -25,8 +25,8 @@ class Context {
         $this->Messages = array();
         $this->Settings = new Settings();
         $this->Router = new Router();
+        $this->Session = new SessionPHP();
         //$this->DB = new \mysqli ($this->settings->db['host'], $this->settings->db['user'], $this->settings->db['password'], $this->settings->db['database']);
-        //$this->Session = new Session($this->db);
     }
     // Main workflow.
     public function Run(){
@@ -38,13 +38,15 @@ class Context {
             $this->Render();
         }
     }
-    // Try to get instance of controller class.
+    // Try to get instance of controller class and check it's handler method.
     private function GetController() {
         if($this->Router->HandlerExists) {
             require_once $this->Router->ControllerPath;
             $class = '\Context\\'.$this->Router->Controller;
             $this->Controller = new $class($this);
-            return true;
+            if(is_object($this->Controller) && method_exists($this->Controller, $this->Router->View)) {
+                return true;
+            }
         }
         return false;
     }

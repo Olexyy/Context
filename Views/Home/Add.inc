@@ -19,10 +19,10 @@ $Model = $this->Model;
   </div>
   <div class="mdl-cell mdl-cell--4-col mdl-cell--middle"></div>
   <div class="mdl-cell mdl-cell--4-col mdl-cell--middle">
-    <input class="mdl-button mdl-js-button text-white" value="Add event" type="submit">
+    <input class="mdl-button mdl-js-button text-white" name="add_button" value="Add event" type="submit">
   </div>
   <div class="mdl-cell mdl-cell--4-col mdl-cell--middle">
-    <input class="mdl-button mdl-js-button text-white" value="View all" type="submit">
+    <input class="mdl-button mdl-js-button text-white" name="view_button" value="View all" type="submit">
   </div>
     <input type="hidden" id="serialized" name="serialized" value=" <?php print $Model ?> " />
 </form>
