@@ -16,8 +16,9 @@ class Home extends Controller {
     }
     if(!empty($this->Context->Router->Post)) {
       $values = $this->Context->Router->Post;
-      if(isset($values['name']) && isset($values['date']) && isset($values['description'])) {
-        $this->Context->Model[\Organizer::Key]->Add($values['name'], $values['date'], $values['description']);
+      // todo add validation
+      if(isset($values['date']) && isset($values['description']) && !empty($values['description'])) {
+        $this->Context->Model[\Organizer::Key]->Add($values['date'], $values['description']);
         $this->Context->Session->SetSleep(\Organizer::Key, $this->Context->Model[\Organizer::Key]);
       }
     }
