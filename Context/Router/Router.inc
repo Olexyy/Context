@@ -11,7 +11,7 @@ class Router {
     public $ControllerPath;
     public $ViewPath;
     public $HandlerExists;
-    
+     
     public function __construct(){
         $parsed_url = explode('/', $_SERVER['REDIRECT_URL']);
         $this->Controller = (isset($parsed_url[1])&&!empty($parsed_url[1]))? $parsed_url[1] : 'Home';
