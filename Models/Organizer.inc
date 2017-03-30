@@ -1,7 +1,7 @@
 <?php
 
 class Event{
-  private $Id;
+  public $Id;
   public $Date;
   public $Description;
   public function __construct($id, $date, $description) {
