@@ -25,5 +25,6 @@ class Router {
         $this->HandlerExists = (isset($this->ControllerPath) && isset($this->ViewPath))?  true : false;
         $this->Get = $GLOBALS['_GET'];
         $this->Post = $GLOBALS['_POST'];
+        $this->Request = $GLOBALS['_REQUEST'];
     }
 }
