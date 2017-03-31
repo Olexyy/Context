@@ -19,7 +19,6 @@ abstract class Model {
 
   public function __construct(Database $db) {
     $this->Fields = array();
-    $this->Name =  __CLASS__;
     $this->DB = $db;
   }
 
@@ -27,5 +26,16 @@ abstract class Model {
     $this->Fields[] = new Field($name, $type, $settings);
   }
 
-  
+}
+
+class Car extends Model {
+  public $ok;
+
+  public function __construct(Database $db) {
+    parent::__construct($db);
+    $reflection = new \ReflectionClass($this);
+    $this->Name = $reflection->getShortName();
+    $this->AddField('ok', 'int', 'not null');
+    $this->DB->CreateTable($this->Name, $this->Fields);
+  }
 }

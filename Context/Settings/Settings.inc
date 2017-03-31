@@ -9,5 +9,5 @@ class Settings {
     'password' => '',
     'database' => 'context',
   );
-  public $UseDB = true;
+  public $UseDB = false;
 }

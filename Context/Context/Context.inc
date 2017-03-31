@@ -28,7 +28,6 @@ class Context {
       $this->Session = new SessionPHP();
       if($this->Settings->UseDB) {
         $this->DB = new Database($this->Settings->DB);
-        $this->DB->CreateTable('sessions', array());
       }
     }
     // Main workflow.

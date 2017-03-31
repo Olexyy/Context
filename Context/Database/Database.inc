@@ -41,9 +41,9 @@ class Database {
     $result = $this->Query($query);
     $count = $result[0]->count;
     if ($count == 0) {
-      $query = "CREATE TABLE {$type} (id INT NOT NULL, PRIMARY KEY(id),";
+      $query = "CREATE TABLE {$type} (id INT NOT NULL, PRIMARY KEY(id)";
       foreach($fields as $field) {
-        $query .= "{$field->Name} {$field->Type} {$field->Setting},";
+        $query .= ",{$field->Name} {$field->Type} {$field->Setting}";
       }
       $query .= ")";
       return $this->Query($query);
