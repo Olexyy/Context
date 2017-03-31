@@ -52,14 +52,3 @@ class Database {
   }
 
 }
-
-class Field {
-  public $Name;
-  public $Type;     // INT | TEXT | NVARCHAR | ...
-  public $Settings; // NULL | NOT NULL | ...
-  public function __construct($name, $type, $settings) {
-    $this->Name = $name;
-    $this->Type = $type;
-    $this->Settings = $settings;
-  }
-}
