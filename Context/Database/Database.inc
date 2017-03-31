@@ -10,6 +10,7 @@ class Database {
         $database_settings = array();
         require_once CONTEXT_ROOT.'/Context/Settings/Database.inc';
         $this->Settings = $database_settings;
+        $this->Connection = new \mysqli ($this->settings->db['host'], $this->settings->db['user'], $this->settings->db['password'], $this->settings->db['database']);
     }
     public function Connect(&$MessageBoard){
         $Connection = $this->Connection = mysqli_connect ($this->Settings['host'], $this->Settings['user'], $this->Settings['password'], $this->Settings['database']);

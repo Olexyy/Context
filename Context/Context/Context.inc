@@ -26,7 +26,7 @@ class Context {
         $this->Settings = new Settings();
         $this->Router = new Router();
         $this->Session = new SessionPHP();
-        //$this->DB = new \mysqli ($this->settings->db['host'], $this->settings->db['user'], $this->settings->db['password'], $this->settings->db['database']);
+        $this->DB = new Database($this->Settings->DB);
     }
     // Main workflow.
     public function Run(){
