@@ -3,24 +3,31 @@
 namespace Context;
 
 class Database {
-    public $Settings;
-    public $Connection;
+  public $Settings;
 
-    public function __construct(){
-        $database_settings = array();
-        require_once CONTEXT_ROOT.'/Context/Settings/Database.inc';
-        $this->Settings = $database_settings;
-        $this->Connection = new \mysqli ($this->settings->db['host'], $this->settings->db['user'], $this->settings->db['password'], $this->settings->db['database']);
+  public function __construct($Settings) {
+    $this->Settings = $Settings;
+  }
+
+  public function Query($query){
+    $connection = new \mysqli ($this->Settings['host'], $this->Settings['user'], $this->Settings['password'], $this->Settings['database']);
+    if($connection->connect_error) {
+      return false;
     }
-    public function Connect(&$MessageBoard){
-        $Connection = $this->Connection = mysqli_connect ($this->Settings['host'], $this->Settings['user'], $this->Settings['password'], $this->Settings['database']);
-        if(mysqli_connect_errno()){
-            $MessageBoard['error'][] = 'Database:' . mysqli_connect_error();
-        }
-        $result = mysqli_query($Connection, "SELECT* FROM table");
-        return $Connection;
+    $result = $connection->query($query);
+    $output = array();
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_object()) {
+        $output[] = $row;
+      }
     }
-    public function Query($Query){
-       mysqli_query($this->Connection, $Query);
-    }
+    $connection->close();
+    return $output;
+  }
+
+  public function Read($type, $id) {
+    $query = "SELECT * FROM {$type} WHERE id={$id}";
+    return $this->Query($query);
+  }
+
 }

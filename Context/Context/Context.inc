@@ -21,12 +21,13 @@ class Context {
     }
     // Constructor.
     private function __construct() {
-        $this->Messages = array();
-        $this->Model = array();
-        $this->Settings = new Settings();
-        $this->Router = new Router();
-        $this->Session = new SessionPHP();
-        $this->DB = new Database($this->Settings->DB);
+      $this->Messages = array();
+      $this->Model = array();
+      $this->Settings = new Settings();
+      $this->Router = new Router();
+      $this->Session = new SessionPHP();
+      $this->DB = new Database($this->Settings->DB);
+      $this->DB->Query();
     }
     // Main workflow.
     public function Run(){
