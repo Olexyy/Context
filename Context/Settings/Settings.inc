@@ -8,6 +8,6 @@ class Settings {
     'user' => 'root',
     'password' => '',
     'database' => 'context',
-    'active' => true,
   );
+  public $UseDB = true;
 }

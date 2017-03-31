@@ -10,8 +10,8 @@ class Context {
     public $Model;      // Model is filled by controller.
     public $Session;    // Session variables class.
     public $Messages;   // Array that can be used in template for system messages.
-    public $DB;         // todo: implement standard mysqli class.
-    public $User;       // todo: implement User depends on session and DB.
+    public $DB;         // Implement wrapper around standard mysqli class.
+    public $User;       // todo: implement User that depends on session and DB.
     // Singleton handler.
     static public function Application(){
         if(!isset(self::$Instance)) {
@@ -26,8 +26,10 @@ class Context {
       $this->Settings = new Settings();
       $this->Router = new Router();
       $this->Session = new SessionPHP();
-      $this->DB = new Database($this->Settings->DB);
-      $this->DB->Query();
+      if($this->Settings->UseDB) {
+        $this->DB = new Database($this->Settings->DB);
+        $this->DB->CreateTable('sessions', array());
+      }
     }
     // Main workflow.
     public function Run(){
@@ -71,6 +73,5 @@ class Context {
     // End procedures.
     public function __destruct() {
         //$this->Session->save_session();
-        //$this->DB->close();
     }
 }
