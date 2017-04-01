@@ -13,29 +13,40 @@ class Field {
 }
 
 abstract class Model {
-  protected $Name;
-  protected $Fields;
+
+  const INT = 'INT';
+  const TEXT = 'TEXT';
+  const NVARCHAR = 'NVARCHAR(255)';
+  const NULL = 'NULL';
+  const NOT_NULL = 'NOT NULL';
+
+  public $Name;
+  public $Fields;
   protected $DB;
 
-  public function __construct(Database $db) {
+  protected function __construct(Database $db) {
     $this->Fields = array();
     $this->DB = $db;
+    $this->SetName();
+    $this->SchemaDefinition();
+    $this->DB->CreateTable($this->Name, $this->Fields);
+  }
+
+  protected function SetName() {
+    $reflection = new \ReflectionClass($this);
+    $this->Name = $reflection->getShortName();
+  }
+
+  protected function SchemaDefinition() {
+    $this->AddField('Id', self::INT, self::NOT_NULL . ', PRIMARY KEY(Id)');
   }
 
   public function AddField($name, $type, $settings) {
     $this->Fields[] = new Field($name, $type, $settings);
   }
 
-}
-
-class Car extends Model {
-  public $ok;
-
-  public function __construct(Database $db) {
-    parent::__construct($db);
-    $reflection = new \ReflectionClass($this);
-    $this->Name = $reflection->getShortName();
-    $this->AddField('ok', 'int', 'not null');
-    $this->DB->CreateTable($this->Name, $this->Fields);
+  public function Find($id, array $params = array()) {
+    return $this->DB->Find($this->name, $id, $params);
   }
+  
 }

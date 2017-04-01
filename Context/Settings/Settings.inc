@@ -9,5 +9,15 @@ class Settings {
     'password' => '',
     'database' => 'context',
   );
-  public $UseDB = false;
+  public $UseDB = true;
+
+  private function __construct() { }
+
+  public static function Instance() {
+    global $Settings;
+    if(!isset($Settings)) {
+      $Settings = new Settings();
+    }
+    return $Settings;
+  }
 }
