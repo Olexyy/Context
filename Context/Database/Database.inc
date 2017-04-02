@@ -8,6 +8,7 @@ class Database {
   private $Password;
   private $User;
   private $UseDB;
+  private $Tables;
   protected static $Instance;
 
   public static function Instance() {
@@ -25,9 +26,10 @@ class Database {
     $this->Password = $DBSettings['password'];
     $this->Database = $DBSettings['database'];
     $this->Host = $DBSettings['host'];
+    $this->Tables = $this->GetTables();
   }
 
-  public function Query($query){
+  public function Query($query) {
     $connection = new \mysqli ($this->Host, $this->User, $this->Password, $this->Database);
     if($connection->connect_error) {
       return false;
@@ -41,6 +43,11 @@ class Database {
     }
     $connection->close();
     return $output;
+  }
+
+  private function GetTables() {
+    $query = "SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->Database}'";
+    return $this->Query($query); // [0]->TABLE_NAME;
   }
 
   public function CreateTable($type, array $fields) {
@@ -119,3 +126,7 @@ class Database {
   }
 
 }
+
+/*SELECT *
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE table_name = 'Address'*/

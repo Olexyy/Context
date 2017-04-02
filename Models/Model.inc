@@ -24,9 +24,9 @@ abstract class Model {
   public $Fields;
   protected $DB;
 
-  protected function __construct(Database $db) {
+  protected function __construct() {
     $this->Fields = array();
-    $this->DB = $db;
+    $this->DB = Database::Instance();
     $this->SetName();
     $this->SchemaDefinition();
     $this->DB->CreateTable($this->Name, $this->Fields);
@@ -41,12 +41,14 @@ abstract class Model {
     $this->AddField('Id', self::INT, self::NOT_NULL . ', PRIMARY KEY(Id)');
   }
 
-  public function AddField($name, $type, $settings) {
+  protected function AddField($name, $type, $settings) {
     $this->Fields[] = new Field($name, $type, $settings);
   }
 
   public function Find($id, array $params = array()) {
-    return $this->DB->Find($this->name, $id, $params);
+    return $this->DB->Read($this->Name, $id, $params);
   }
+
   
+
 }

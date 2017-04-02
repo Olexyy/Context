@@ -21,12 +21,11 @@ class Context {
   }
   // Constructor.
   private function __construct() {
-    global $Settings;
-    $this->Settings = $Settings;
     $this->Messages = array();
     $this->Model = array();
     $this->Router = new Router();
     $this->Session = new SessionPHP();
+    $this->Settings = Settings::Instance();
     $this->DB = Database::Instance();
   }
   // Main workflow.

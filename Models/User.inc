@@ -23,7 +23,7 @@ class User extends Model {
     parent::SetName();
   }
 
-  protected function __construct(Database $db) {
-    parent::__construct($db);
+  protected function __construct() {
+    parent::__construct();
   }
 }
