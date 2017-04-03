@@ -3,7 +3,6 @@
 namespace Context;
 
 class User extends Model {
-  public $Id;
   public $Name;
   public $Password;
   public $Created;

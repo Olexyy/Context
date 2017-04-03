@@ -23,8 +23,9 @@ abstract class Model {
   protected static $Models;
   protected static $DB;
 
-  public $FullName;
-  public $Name;
+  public $Id;
+  public $ClassFullName;
+  public $ClassShortName;
   public $Fields;
 
   public final static function SetUp() {
@@ -47,17 +48,17 @@ abstract class Model {
   }
 
   public function Initialize() {
-    self::$DB->Instance()->CreateTable($this->Name, $this->Fields);
+    self::$DB->CreateTable($this->ClassShortName, $this->Fields);
   }
 
   public function Instance() {
-    return new $this->FullName();
+    return new $this->ClassFullName();
   }
 
   protected function SetName() {
     $reflection = new \ReflectionClass($this);
-    $this->Name = $reflection->getShortName();
-    $this->FullName = $reflection->getName();
+    $this->ClassShortName = $reflection->getShortName();
+    $this->ClassFullName = $reflection->getName();
   }
 
   protected function SchemaDefinition() {
@@ -69,7 +70,7 @@ abstract class Model {
   }
 
   public function Find($id, array $params = array()) {
-    return $this->DB->Read($this->Name, $id, $params);
+    return self::$DB->Read($this->ClassShortName, $id, $params);
   }
 
 }
