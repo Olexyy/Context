@@ -27,6 +27,7 @@ class Context {
     $this->Session = new SessionPHP();
     $this->Settings = Settings::Instance();
     $this->DB = Database::Instance();
+    Model::SetUp();
   }
   // Main workflow.
   public function Run(){

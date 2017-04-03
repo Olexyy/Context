@@ -20,21 +20,44 @@ abstract class Model {
   const NULL = 'NULL';
   const NOT_NULL = 'NOT NULL';
 
+  protected static $Models;
+  protected static $DB;
+
+  public $FullName;
   public $Name;
   public $Fields;
-  protected $DB;
 
-  protected function __construct() {
+  public final static function SetUp() {
+    self::$DB = Database::Instance();
+    self::$Models = array();
+    foreach(get_declared_classes() as $class){
+      if(is_subclass_of($class, __CLASS__)) {
+        self::$Models[$class] = new $class();
+        if(!in_array($class, self::$DB->Instance()->Tables)) {
+          self::$Models[$class]->Initialize();
+        }
+      }
+    }
+  }
+
+  public function __construct() {
     $this->Fields = array();
-    $this->DB = Database::Instance();
     $this->SetName();
     $this->SchemaDefinition();
-    $this->DB->CreateTable($this->Name, $this->Fields);
+  }
+
+  public function Initialize() {
+    self::$DB->Instance()->CreateTable($this->Name, $this->Fields);
+  }
+
+  public function Instance() {
+    return new $this->FullName();
   }
 
   protected function SetName() {
     $reflection = new \ReflectionClass($this);
     $this->Name = $reflection->getShortName();
+    $this->FullName = $reflection->getName();
   }
 
   protected function SchemaDefinition() {
@@ -48,7 +71,5 @@ abstract class Model {
   public function Find($id, array $params = array()) {
     return $this->DB->Read($this->Name, $id, $params);
   }
-
-  
 
 }

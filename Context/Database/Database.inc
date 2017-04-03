@@ -8,7 +8,7 @@ class Database {
   private $Password;
   private $User;
   private $UseDB;
-  private $Tables;
+  public $Tables;
   protected static $Instance;
 
   public static function Instance() {
@@ -26,7 +26,7 @@ class Database {
     $this->Password = $DBSettings['password'];
     $this->Database = $DBSettings['database'];
     $this->Host = $DBSettings['host'];
-    $this->Tables = $this->GetTables();
+    $this->GetTables();
   }
 
   public function Query($query) {
@@ -47,7 +47,12 @@ class Database {
 
   private function GetTables() {
     $query = "SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->Database}'";
-    return $this->Query($query); // [0]->TABLE_NAME;
+    $results = $this->Query($query); // [0]->TABLE_NAME;
+    $tables = array();
+    foreach ($results as $result) {
+      $tables[] = $result->TABLE_NAME;
+    }
+    $this->Tables = $tables;
   }
 
   public function CreateTable($type, array $fields) {
@@ -60,7 +65,11 @@ class Database {
         $query .= " {$field->Name} {$field->Type} {$field->Settings},";
       }
       $query = substr_replace($query, ")", -1);
-      return $this->Query($query);
+      $result = $this->Query($query);
+      if($result) {
+        $this->GetTables();
+      }
+      return $result;
     }
     return false;
   }
@@ -123,6 +132,10 @@ class Database {
     $query = "DELETE FROM {$name} WHERE Id={$id}";
     $result = $this->Query($query);
     return $result;
+  }
+
+  public function TableExists($table) {
+    return in_array($table, $this->Tables);
   }
 
 }
