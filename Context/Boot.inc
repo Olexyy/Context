@@ -6,9 +6,6 @@ require_once CONTEXT_ROOT . '/Context/Session/SessionPHP.inc';
 require_once CONTEXT_ROOT . '/Context/Database/Database.inc';
 require_once CONTEXT_ROOT . '/Context/Context/Context.inc';
 require_once CONTEXT_ROOT . '/Controllers/Controller.inc';
-/*require_once CONTEXT_ROOT . '/Models/Model.inc';
-require_once CONTEXT_ROOT . '/Models/User.inc';
-require_once CONTEXT_ROOT . '/Models/Organizer.inc';*/
 // Models loaded automatically.
 foreach (new DirectoryIterator(CONTEXT_ROOT . '/Models') as $file_info) {
   if (!$file_info->isDot() && $file_info->isFile()) {

@@ -109,7 +109,11 @@ class Database {
     $fields = substr_replace($fields, ")", -1);
     $values = substr_replace($values, ")", -1);
     $query = "INSERT INTO {$model->ClassShortName} {$fields} VALUES {$values}";
-    $result = $this->Query($query);
+    if($result = $this->Query($query)) {
+      $query = "SELECT MAX(Id) as MaxId FROM {$model->ClassShortName} ";
+      $result = $this->Query($query);
+      return $result[0]->MaxId;
+    }
     return $result;
   }
 

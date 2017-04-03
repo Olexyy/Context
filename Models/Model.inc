@@ -74,7 +74,12 @@ abstract class Model {
   }
 
   public static function Create(Model $model) {
-    return self::$DB->Create($model);
+    $id = self::$DB->Create($model);
+    if($id) {
+      $model->Id = $id;
+      return true;
+    }
+    return false;
   }
 
   public static function Read($id, array $params = null) {
