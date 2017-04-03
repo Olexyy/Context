@@ -15,7 +15,7 @@ class Database {
     if(!isset(self::$Instance)) {
       self::$Instance = new Database();
     }
-    return (self::Instance()->UseDB)? self::$Instance : false;
+    return (self::$Instance->UseDB)? self::$Instance : false;
   }
 
   protected function __construct() {
@@ -26,7 +26,9 @@ class Database {
     $this->Password = $DBSettings['password'];
     $this->Database = $DBSettings['database'];
     $this->Host = $DBSettings['host'];
-    $this->GetTables();
+    if($this->UseDB = $Settings->UseDB) {
+      $this->GetTables();
+    }
   }
 
   public function Query($query) {
@@ -35,6 +37,9 @@ class Database {
       return false;
     }
     $result = $connection->query($query);
+    if($result === true || $result === false ) {
+      return $result;
+    }
     $output = array();
     if ($result->num_rows > 0) {
       while($row = $result->fetch_object()) {
@@ -55,13 +60,13 @@ class Database {
     $this->Tables = $tables;
   }
 
-  public function CreateTable($type, array $fields) {
-    $query = "SELECT COUNT(*) as count FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->Database}' AND TABLE_NAME = '{$type}'";
+  public function CreateTable(Model $model) {
+    $query = "SELECT COUNT(*) as count FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->Database}' AND TABLE_NAME = '{$model->ClassShortName}'";
     $result = $this->Query($query);
     $count = $result[0]->count;
     if ($count == 0) {
-      $query = "CREATE TABLE {$type} (";
-      foreach($fields as $field) {
+      $query = "CREATE TABLE {$model->ClassShortName} (";
+      foreach($model->Fields as $field) {
         $query .= " {$field->Name} {$field->Type} {$field->Settings},";
       }
       $query = substr_replace($query, ")", -1);
@@ -74,9 +79,9 @@ class Database {
     return false;
   }
 
-  public function Read($name, $id, array $params = array()) {
-    $query = "SELECT * FROM {$name} WHERE Id={$id}";
-    if(!empty($params)) {
+  public function Read(Model $model, array $params = null) {
+    $query = "SELECT * FROM {$model->ClassShortName} WHERE Id={$model->Id}";
+    if(is_array($params) && !empty($params)) {
       foreach ($params as $operand => $param) {
         $query .= " $operand $param";
       }
@@ -103,7 +108,7 @@ class Database {
     }
     $fields = substr_replace($fields, ")", -1);
     $values = substr_replace($values, ")", -1);
-    $query = "INSERT INTO {$model->Name} {$fields} VALUES {$values}";
+    $query = "INSERT INTO {$model->ClassShortName} {$fields} VALUES {$values}";
     $result = $this->Query($query);
     return $result;
   }
@@ -121,15 +126,13 @@ class Database {
       }
     }
     $set = substr_replace($set, "", -1);
-    $query = "UPDATE {$model->Name} SET  {$set} WHERE Id={$model->Id}";
+    $query = "UPDATE {$model->ClassShortName} SET  {$set} WHERE Id={$model->Id}";
     $result = $this->Query($query);
     return $result;
   }
 
-  public function Delete($id, $name = null) {
-    $id = (isset($name))? $id : $id->Id;
-    $name = (isset($name))? $name : $id->Name;
-    $query = "DELETE FROM {$name} WHERE Id={$id}";
+  public function Delete(Model $model) {
+    $query = "DELETE FROM {$model->ClassShortName} WHERE Id={$model->Id}";
     $result = $this->Query($query);
     return $result;
   }

@@ -29,30 +29,34 @@ abstract class Model {
   public $Fields;
 
   public final static function SetUp() {
-    self::$DB = Database::Instance();
-    self::$Models = array();
-    foreach(get_declared_classes() as $class){
-      if(is_subclass_of($class, __CLASS__)) {
-        self::$Models[$class] = new $class();
-        if(!in_array($class, self::$DB->Instance()->Tables)) {
-          self::$Models[$class]->Initialize();
+    if(self::$DB = Database::Instance()) {
+      self::$Models = array();
+      foreach (get_declared_classes() as $class) {
+        if (is_subclass_of($class, __CLASS__)) {
+          self::$Models[$class] = new $class();
+          if (!self::$DB->TableExists(self::$Models[$class]->ClassShortName)) {
+            self::$Models[$class]->Initialize();
+          }
         }
       }
     }
   }
 
-  public function __construct() {
+  public function __construct(array $params = null) {
     $this->Fields = array();
     $this->SetName();
     $this->SchemaDefinition();
+    if(isset($params) && is_array($params)) {
+      foreach ($this->Fields as $field) {
+        if(isset($params[$field->Name])) {
+          $this->{$field->Name} = $params[$field->Name];
+        }
+      }
+    }
   }
 
   public function Initialize() {
-    self::$DB->CreateTable($this->ClassShortName, $this->Fields);
-  }
-
-  public function Instance() {
-    return new $this->ClassFullName();
+    self::$DB->CreateTable($this);
   }
 
   protected function SetName() {
@@ -62,15 +66,48 @@ abstract class Model {
   }
 
   protected function SchemaDefinition() {
-    $this->AddField('Id', self::INT, self::NOT_NULL . ', PRIMARY KEY(Id)');
+    $this->AddField('Id', self::INT, self::NOT_NULL.' AUTO_INCREMENT, PRIMARY KEY(Id)');
   }
 
   protected function AddField($name, $type, $settings) {
     $this->Fields[] = new Field($name, $type, $settings);
   }
 
-  public function Find($id, array $params = array()) {
-    return self::$DB->Read($this->ClassShortName, $id, $params);
+  public static function Create(Model $model) {
+    return self::$DB->Create($model);
+  }
+
+  public static function Read($id, array $params = null) {
+    if(is_numeric($id)) {
+      $class_name = get_called_class();
+      $model = new $class_name (array( 'Id' => $id ));
+      $object = self::$DB->Read($model, $params);
+      if(isset($object) && is_object($object)) {
+        foreach ($model->Fields as $field) {
+          if(isset($object->{$field->Name})) {
+            $model->{$field->Name} = $object->{$field->Name};
+          }
+        }
+        return $model;
+      }
+    }
+    return false;
+  }
+
+  public static function Update (Model $model) {
+    return self::$DB->Update($model);
+  }
+
+  public static function Delete ($mixed) {
+    if($mixed instanceof Model) {
+      return self::$DB->Delete($mixed);
+    }
+    if(is_numeric($mixed)) {
+      $class_name = get_called_class();
+      $model = new $class_name (array( 'Id' => $mixed ));
+      return self::$DB->Delete($model);
+    }
+    return false;
   }
 
 }

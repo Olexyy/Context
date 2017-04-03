@@ -10,8 +10,8 @@ class Context {
   public $Model;      // Model is filled by controller.
   public $Session;    // Session variables class.
   public $Messages;   // Array that can be used in template for system messages.
-  public $DB;         // Implement wrapper around standard mysqli class.
-  public $User;       // todo: implement User that depends on session and DB.
+  public $DB;         // Implementation of wrapper around standard mysqli class.
+  public $User;       // Implementation of User that depends on session and DB.
   // Singleton handler.
   static public function Application(){
     if(!isset(self::$Instance)) {
@@ -22,7 +22,7 @@ class Context {
   // Constructor.
   private function __construct() {
     $this->Messages = array();
-    $this->Model = array();
+    $this->Model = '';
     $this->Router = new Router();
     $this->Session = new SessionPHP();
     $this->Settings = Settings::Instance();

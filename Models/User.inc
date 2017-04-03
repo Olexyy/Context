@@ -17,12 +17,4 @@ class User extends Model {
     $this->AddField('LastLogin', self::INT, self::NULL);
     $this->AddField('Data', self::TEXT, self::NULL);
   }
-
-  protected function SetName() {
-    parent::SetName();
-  }
-
-  public function __construct() {
-    parent::__construct();
-  }
 }

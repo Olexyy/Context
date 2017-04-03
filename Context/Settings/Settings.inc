@@ -12,7 +12,7 @@ class Settings {
   public $UseDB = true;
 
   private function __construct() { }
-  
+
   public static function Instance() {
     global $Settings;
     if(!isset($Settings)) {
