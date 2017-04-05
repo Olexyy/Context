@@ -94,6 +94,21 @@ abstract class Model {
     return false;
   }
 
+  public static function Find (array $params = null) {
+    $class_name = get_called_class();
+    $model = new $class_name ();
+    $objects = self::$DB->Find($model, $params);
+    if(is_array($objects) && !empty($objects)) {
+      $models = array();
+      foreach($objects as $object) {
+        $model = new $class_name ();
+        $models[]= self::ObjectToModel($object, $model);
+      }
+      return $models;
+    }
+    return false;
+  }
+
   public static function All ($limit = null, $offset = null) {
     $class_name = get_called_class();
     $model = new $class_name ();
@@ -104,6 +119,7 @@ abstract class Model {
         $model = new $class_name ();
         $models[]= self::ObjectToModel($object, $model);
       }
+      return $models;
     }
     return false;
   }

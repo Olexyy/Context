@@ -93,6 +93,17 @@ class Database {
     return $result;
   }
 
+  public function Find(Model $model, array $params = null) {
+    $query = "SELECT * FROM {$model->ClassShortName} WHERE ";
+    if(is_array($params) && !empty($params)) {
+      foreach ($params as $operand => $param) {
+        $query .= " $operand $param";
+      }
+    }
+    $result = $this->Query($query);
+    return $result;
+  }
+
   public function Create(Model $model) {
     $fields = $values ='(';
     foreach ($model->Fields as $field) {

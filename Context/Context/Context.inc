@@ -3,7 +3,6 @@
 namespace Context;
 
 class Context {
-  static $Instance;   // Singleton.
   public $Settings;   // Class that defines basic settings.
   public $Router;     // Class that defines controller, it's method and holds get/post vars.
   public $Controller; // Controller class: is defined by reflection.
@@ -13,11 +12,12 @@ class Context {
   public $DB;         // Implementation of wrapper around standard mysqli class.
   public $User;       // Implementation of User that depends on session and DB.
   // Singleton handler.
-  static public function Application(){
-    if(!isset(self::$Instance)) {
-        self::$Instance = new Context();
+  static public function Application() {
+    global $Context; // Singleton.
+    if(!isset($Context)) {
+      $Context = new Context();
     }
-    return self::$Instance;
+    return $Context;
   }
   // Constructor.
   private function __construct() {

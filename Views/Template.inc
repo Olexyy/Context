@@ -15,6 +15,29 @@
                     <span class="mdl-layout-title text-muted"><h3>Organizer</h3></span>
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
+                    <!-- Textfield with Floating Label -->
+                    <?php if(!\Context\Utils::IsLoggedIn()): ?>
+                        <form action="/Login/Login" method="post">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" name="login" type="text" id="login">
+                                <label class="mdl-textfield__label" for="login">Login</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" name="password" type="text" id="password">
+                                <label class="mdl-textfield__label" for="password">Password</label>
+                            </div>
+                            <input type="submit" value="Login" name="Login" class="text-white mdl-button mdl-js-button">
+                        </form>
+                    <?php else: ?>
+                        <h1 class="text-white"> Welcome <?php echo \Context\Utils::GetUser()->Name ?> </h1>
+                        <form action="/Login/Logout" method="post">
+                            <input type="submit" value="Logout" name="Logout" class="text-white mdl-button mdl-js-button">
+                        </form>
+                    <?php endif; ?>
+                </div>
+                <div class="mdl-layout__header-row">
+                    <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
                     <!-- Navigation -->
                     <nav class="mdl-navigation">
                         <a class="mdl-navigation__link" href="/Home/Index">Home</a>
