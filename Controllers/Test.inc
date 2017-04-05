@@ -2,7 +2,7 @@
 
 namespace Context;
 
-class Test extends Controller {
+class TestController extends Controller {
   // $this->Context->Model can be set.
   public function Index() {
     echo "Beginning base crud for model 'User'...";
@@ -19,6 +19,10 @@ class Test extends Controller {
     $result = User::Update($user);
     if($result == true) {
       echo "Updated entity of 'User'...";
+    }
+    $result = User::All();
+    if(is_array($result) && count($result) == 1) {
+      echo "Obtained array of Users";
     }
     $result = User::Delete($user);
     if($result == true) {

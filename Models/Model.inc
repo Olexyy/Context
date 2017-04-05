@@ -88,17 +88,26 @@ abstract class Model {
       $model = new $class_name (array( 'Id' => $id ));
       $object = self::$DB->Read($model, $params);
       if(isset($object) && is_object($object)) {
-        foreach ($model->Fields as $field) {
-          if(isset($object->{$field->Name})) {
-            $model->{$field->Name} = $object->{$field->Name};
-          }
-        }
-        return $model;
+        return self::ObjectToModel($object, $model);
       }
     }
     return false;
   }
 
+  public static function All ($limit = null, $offset = null) {
+    $class_name = get_called_class();
+    $model = new $class_name ();
+    $objects = self::$DB->All($model, $limit, $offset);
+    if(is_array($objects) && !empty($objects)) {
+      $models = array();
+      foreach($objects as $object) {
+        $model = new $class_name ();
+        $models[]= self::ObjectToModel($object, $model);
+      }
+    }
+    return false;
+  }
+  
   public static function Update (Model $model) {
     return self::$DB->Update($model);
   }
@@ -113,6 +122,15 @@ abstract class Model {
       return self::$DB->Delete($model);
     }
     return false;
+  }
+
+  private static function ObjectToModel(\stdClass $object, Model $model) {
+    foreach ($model->Fields as $field) {
+      if(isset($object->{$field->Name})) {
+        $model->{$field->Name} = $object->{$field->Name};
+      }
+    }
+    return $model;
   }
 
 }

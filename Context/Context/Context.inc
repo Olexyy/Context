@@ -43,7 +43,7 @@ class Context {
   private function GetController() {
       if($this->Router->HandlerExists) {
           require_once $this->Router->ControllerPath;
-          $class = '\Context\\'.$this->Router->Controller;
+          $class = '\Context\\' . $this->Router->Controller . 'Controller';
           $this->Controller = new $class($this);
           if(is_object($this->Controller) && method_exists($this->Controller, $this->Router->View)) {
               return true;

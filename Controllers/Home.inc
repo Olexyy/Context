@@ -2,7 +2,7 @@
 
 namespace Context;
 
-class Home extends Controller {
+class HomeController extends Controller {
   // $this->Context->Model array should be set.
   public function Index() {
       $this->Context->Model = '<h2>Welcome to Organizer!</h2>';

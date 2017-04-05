@@ -141,6 +141,18 @@ class Database {
     return $result;
   }
 
+  public function All(Model $model, $limit = null, $offset = null) {
+    $query = "SELECT * FROM {$model->ClassShortName}";
+    if(isset($limit) && is_numeric($limit)) {
+      $query .= " LIMIT $limit";
+      if(isset($offset) && is_numeric($offset)) {
+        $query .= " OFFSET $offset";
+      }
+    }
+    $result = $this->Query($query);
+    return $result;
+  }
+
   public function TableExists($table) {
     return in_array($table, $this->Tables);
   }
