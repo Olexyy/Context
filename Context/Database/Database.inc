@@ -20,7 +20,7 @@ class Database {
 
   protected function __construct() {
     global $Settings;
-    $DBSettings = $Settings->DB;
+    $DBSettings = $Settings->DB[$Settings->Environment];
     $this->UseDB = $Settings->UseDB;
     $this->User = $DBSettings['user'];
     $this->Password = $DBSettings['password'];
