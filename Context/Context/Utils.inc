@@ -28,4 +28,19 @@ class Utils {
     }
     return false;
   }
+
+  public static function UnsetUser($id) {
+    if(self::ValidateId($id)) {
+      $existing = Context::Application()->Session->Get('User');
+      if(isset($existing) && $existing == $id) {
+        Context::Application()->Session->Set('User', null);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static function Redirect($path) {
+    header('location:'.$path);
+  }
 }

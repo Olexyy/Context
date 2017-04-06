@@ -29,8 +29,10 @@
                             <input type="submit" value="Login" name="Login" class="text-white mdl-button mdl-js-button">
                         </form>
                     <?php else: ?>
-                        <h1 class="text-white"> Welcome <?php echo \Context\Utils::GetUser()->Name ?> </h1>
+                        <?php $user = \Context\Utils::GetUser(); ?>
+                        <h1 class="text-white"> Welcome <?php echo $user->Name; ?> </h1>
                         <form action="/Login/Logout" method="post">
+                            <input type="hidden" value="<?php echo $user->Id; ?>" name="user">
                             <input type="submit" value="Logout" name="Logout" class="text-white mdl-button mdl-js-button">
                         </form>
                     <?php endif; ?>
@@ -43,6 +45,9 @@
                         <a class="mdl-navigation__link" href="/Home/Index">Home</a>
                         <a class="mdl-navigation__link" href="/Home/Add">Add record</a>
                         <a class="mdl-navigation__link" href="/Home/View">View all</a>
+                        <?php if(\Context\Utils::IsLoggedIn()): ?>
+                            <a class="mdl-navigation__link" href="/User/Index">Users</a>
+                        <?php endif; ?>
                     </nav>
                 </div>
             </header>

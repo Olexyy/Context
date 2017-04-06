@@ -11,12 +11,17 @@ class LoginController extends Controller{
         $user = $users[0];
         if(md5($params['password']) == $user->Password) {
           Utils::SetUser($user->Id);
-          header('location:/Index/Home');
+          Utils::Redirect('/Home/Index');
         }
       }
     }
   }
+
   public function Logout() {
-    
+    $params = $this->Context->Router->Post;
+    if(isset($params['user']) && $params['Logout'] == 'Logout') {
+      Utils::UnsetUser($params['user']);
+      Utils::Redirect('/Home/Index');
+    }
   }
 }

@@ -19,7 +19,7 @@ $Model = $this->Model;
             </span>
           </span>
           <span class="mdl-list__item-secondary-content">
-            <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+            <a class="mdl-list__item-secondary-action" href="/User/Delete/?user=<?php echo $user->Id ?>"><i class="material-icons">close</i></a>
           </span>
         </li>
       <?php endforeach; ?>

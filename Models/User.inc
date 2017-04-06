@@ -9,7 +9,7 @@ class User extends Model {
   public $LastLogin;
   public $Data;
   
-  protected function SchemaDefinition(){
+  protected function SchemaDefinition() {
     parent::SchemaDefinition();
     $this->AddField('Name', self::NVARCHAR, self::NOT_NULL);
     $this->AddField('Password', self::NVARCHAR, self::NOT_NULL);
