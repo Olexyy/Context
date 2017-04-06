@@ -82,11 +82,11 @@ abstract class Model {
     return false;
   }
 
-  public static function Read($id, array $params = null) {
+  public static function Read($id) {
     if(is_numeric($id)) {
       $class_name = get_called_class();
       $model = new $class_name (array( 'Id' => $id ));
-      $object = self::$DB->Read($model, $params);
+      $object = self::$DB->Read($model);
       if(isset($object) && is_object($object)) {
         return self::ObjectToModel($object, $model);
       }
@@ -94,10 +94,10 @@ abstract class Model {
     return false;
   }
 
-  public static function Find (array $params = null) {
+  public static function Where (array $params = null) {
     $class_name = get_called_class();
     $model = new $class_name ();
-    $objects = self::$DB->Find($model, $params);
+    $objects = self::$DB->Where($model, $params);
     if(is_array($objects) && !empty($objects)) {
       $models = array();
       foreach($objects as $object) {

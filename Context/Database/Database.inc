@@ -79,13 +79,8 @@ class Database {
     return false;
   }
 
-  public function Read(Model $model, array $params = null) {
+  public function Read(Model $model) {
     $query = "SELECT * FROM {$model->ClassShortName} WHERE Id={$model->Id}";
-    if(is_array($params) && !empty($params)) {
-      foreach ($params as $operand => $param) {
-        $query .= " $operand $param";
-      }
-    }
     $result = $this->Query($query);
     if(count($result) == 1) {
       return $result[0];
@@ -93,7 +88,7 @@ class Database {
     return $result;
   }
 
-  public function Find(Model $model, array $params = null) {
+  public function Where(Model $model, array $params = null) {
     $query = "SELECT * FROM {$model->ClassShortName} WHERE ";
     if(is_array($params) && !empty($params)) {
       foreach ($params as $operand => $param) {

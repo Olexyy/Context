@@ -2,10 +2,10 @@
 
 namespace Context;
 
-class OrganizerController extends Controller {
+class EventController extends Controller {
   // $this->Context->Model array should be set.
   public function Index() {
-      $this->Context->Model = ;
+      $this->Context->Model = 1;
   }
   public function Add() {
     if($this->Context->Session->KeyExists(\Organizer::Key)) {
