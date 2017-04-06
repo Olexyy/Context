@@ -16,9 +16,12 @@ class Utils {
     return isset($user_id );
   }
 
-  public static function GetUser() {
+  public static function GetUser($entity = true) {
     $user_id = Context::Application()->Session->Get('User');
-    return isset($user_id)? User::Read($user_id) : false;
+    if(!isset($user_id)) {
+      return false;
+    }
+    return ($entity)? User::Read($user_id) : $user_id;
   }
 
   public static function SetUser($id) {

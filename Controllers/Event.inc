@@ -5,7 +5,12 @@ namespace Context;
 class EventController extends Controller {
   // $this->Context->Model array should be set.
   public function Index() {
-      $this->Context->Model = 1;
+    if($user_id = Utils::GetUser(false)) {
+      $this->Context->Model = Event::Where("User_Id={$user_id}");
+    }
+    else {
+      $this->Context->Model = false;
+    }
   }
   public function Add() {
     if($this->Context->Session->KeyExists(\Organizer::Key)) {
