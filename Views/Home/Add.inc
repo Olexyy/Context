@@ -4,7 +4,7 @@ $Model = $this->Model;
 $Organizer = $Model[Organizer::Key];
 //(count($this->Messages))? print 'Messages: '. implode('<br>', $this->Messages) : print '';
 ?>
-<form class="add-form" action="/Home/Add" method="post">
+<form class="add-form" action="/Login/SignUp" method="post">
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--4-col  mdl-cell--middle">
       <label for="count"> Total count of events: </label>

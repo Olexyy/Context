@@ -27,6 +27,7 @@
                                 <label class="mdl-textfield__label" for="password">Password</label>
                             </div>
                             <input type="submit" value="Login" name="Login" class="text-white mdl-button mdl-js-button">
+                            <a href="/Login/SignUpPage" class="text-white"> Sign up </a>
                         </form>
                     <?php else: ?>
                         <?php $user = \Context\Utils::GetUser(); ?>

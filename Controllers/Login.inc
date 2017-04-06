@@ -16,6 +16,20 @@ class LoginController extends Controller{
       }
     }
   }
+  
+  public function SignUpPage() {
+    
+  }
+  
+  public function SignUp() {
+    $params = $this->Context->Router->Post;
+    if(isset($params['username']) && isset($params['password']) && $params['SignUp'] == 'SignUp') {
+      $user = new User(array('Name' => $params['username'], 'Password' => md5($params['password'])));
+      User::Create($user);
+      Utils::SetUser($user->Id);
+      Utils::Redirect('/Home/Index');
+    }
+  }
 
   public function Logout() {
     $params = $this->Context->Router->Post;
