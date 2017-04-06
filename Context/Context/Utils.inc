@@ -40,6 +40,10 @@ class Utils {
     return false;
   }
 
+  static function EncryptPass($pass) {
+    return md5($pass);
+  }
+
   public static function Redirect($path) {
     header('location:'.$path);
   }

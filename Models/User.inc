@@ -17,8 +17,4 @@ class User extends Model {
     $this->AddField('LastLogin', self::INT, self::NULL);
     $this->AddField('Data', self::TEXT, self::NULL);
   }
-
-  static function EncryptPass($pass) {
-    return md5($pass);
-  }
 }

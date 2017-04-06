@@ -3,7 +3,7 @@
 $Model = $this->Model;
 //(count($this->Messages))? print 'Messages: '. implode('<br>', $this->Messages) : print '';
 ?>
-<form class="add-form" action="/Login/SignUp" method="post">
+<form class="add-form" action="/User/SignUp" method="post">
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--8-col mdl-cell--middle">
       <h3 class="title">Sign up: </h3>

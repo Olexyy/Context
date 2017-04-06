@@ -17,7 +17,7 @@
                     <div class="mdl-layout-spacer"></div>
                     <!-- Textfield with Floating Label -->
                     <?php if(!\Context\Utils::IsLoggedIn()): ?>
-                        <form action="/Login/Login" method="post">
+                        <form action="/User/Login" method="post">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" name="login" type="text" id="login">
                                 <label class="mdl-textfield__label" for="login">Login</label>
@@ -27,12 +27,12 @@
                                 <label class="mdl-textfield__label" for="password">Password</label>
                             </div>
                             <input type="submit" value="Login" name="Login" class="text-white mdl-button mdl-js-button">
-                            <a href="/Login/SignUpPage" class="text-white"> Sign up </a>
+                            <a href="/User/SignUpPage" class="text-white"> Sign up </a>
                         </form>
                     <?php else: ?>
                         <?php $user = \Context\Utils::GetUser(); ?>
                         <h1 class="text-white"> Welcome <?php echo $user->Name; ?> </h1>
-                        <form action="/Login/Logout" method="post">
+                        <form action="/User/Logout" method="post">
                             <input type="hidden" value="<?php echo $user->Id; ?>" name="user">
                             <input type="submit" value="Logout" name="Logout" class="text-white mdl-button mdl-js-button">
                         </form>

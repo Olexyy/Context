@@ -6,7 +6,7 @@ class TestController extends Controller {
   // $this->Context->Model can be set.
   public function Index() {
     echo "Beginning base crud for model 'User'.|";
-    $user = new User(array('Name' => 'Testovich', 'Password' => User::EncryptPass('12345'), 'Created' => time()));
+    $user = new User(array('Name' => 'Testovich', 'Password' => Utils::EncryptPass('12345'), 'Created' => time()));
     $result = User::Create($user);
     if($result == true) {
       echo "Created entity of 'User'.|";
