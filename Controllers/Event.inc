@@ -4,7 +4,7 @@ namespace Context;
 
 class EventController extends Controller {
   // $this->Context->Model array should be set.
-  public function Index() {
+  public function All() {
     if($user_id = Utils::GetUser($entity = false)) {
       $this->Context->Model = Event::Where("User_Id={$user_id}");
     }
@@ -21,28 +21,22 @@ class EventController extends Controller {
     }
   }
   public function Add() {
-    if($this->Context->Session->KeyExists(\Organizer::Key)) {
-      $this->Context->Model[\Organizer::Key] = $this->Context->Session->GetWakeUp(\Organizer::Key);
-    }
-    else {
-      $this->Context->Model[\Organizer::Key] = new \Organizer();
-    }
-    if(!empty($this->Context->Router->Post)) {
-      $values = $this->Context->Router->Post;
-      // todo add validation
-      if(isset($values['date']) && isset($values['description']) && !empty($values['description'])) {
-        $this->Context->Model[\Organizer::Key]->Add($values['date'], $values['description']);
-        $this->Context->Session->SetSleep(\Organizer::Key, $this->Context->Model[\Organizer::Key]);
+    if($user_id = Utils::GetUser($entity = false)) {
+      $params = $this->Context->Router->Post;
+      if(isset($params['date']) && isset($params['description']) && $params['add_button'] == 'Add event') {
+        $event = new Event(array('Date' => strtotime($params['date']), 'Description' => $params['description'], 'User_Id' => $user_id,));
+        Event::Create($event);
+        Utils::Redirect('/Event/All');
       }
     }
   }
-  public function View() {
-    if($this->Context->Session->KeyExists(\Organizer::Key)) {
-      $this->Context->Model[\Organizer::Key] = $this->Context->Session->GetWakeUp(\Organizer::Key);
-    }
-    else {
-      $this->Context->Model[\Organizer::Key] = new \Organizer();
-      $this->Context->Session->SetSleep(\Organizer::Key, $this->Context->Model[\Organizer::Key]);
+  public function Delete() {
+    if($user_id = Utils::GetUser($entity = false)) {
+      $params = $this->Context->Router->Get;
+      if(isset($params['id'])) {
+        Event::Delete($params['id']);
+        Utils::Redirect('/Event/All');
+      }
     }
   }
 }

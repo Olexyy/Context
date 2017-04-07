@@ -14,24 +14,19 @@ if(!\Context\Utils::IsLoggedIn()) {
     HTML::mdlCell(8);
       HTML::h3("Add event");
     HTML::mdlClose();
-    HTML::mdlCell(4); HTML::mdlClose();
-    HTML::mdlCell(4);
-      HTML::p("Total count of events:");
-    HTML::mdlClose();
-    HTML::mdlCell(4, count($Model)); HTML::mdlClose();
     HTML::mdlCell(4); HTML::mdlClose(); ?>
-    <div class="mdl-cell mdl-cell--4-col ">
-      <?php HTML::labelFor('date', 'Input date of event:') ?>
-    </div>
-    <div class="mdl-cell mdl-cell--4-col ">
-      <?php HTML::input('date', 'date') ?>
+    <div class="mdl-cell mdl-cell--8-col mdl-cell--middle">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" value="<?php print date('Y-m-d')?>" name="date" type="date" id="date">
+        <label class="mdl-textfield__label" for="date">Input date</label>
+      </div>
     </div>
     <div class="mdl-cell mdl-cell--4-col "></div>
-    <div class="mdl-cell mdl-cell--4-col ">
-      <label for="description"> Input description of event: </label>
-    </div>
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--middle">
-      <textarea id="description" name="description" cols="17" rows="5"> </textarea>
+    <div class="mdl-cell mdl-cell--8-col mdl-cell--middle">
+      <div class="mdl-textfield mdl-js-textfield text-white mdl-textfield--floating-label">
+        <textarea class="mdl-textfield__input" name="description" type="text" width="400" rows= "3" id="description" ></textarea>
+        <label class="mdl-textfield__label" for="description">Description of event</label>
+      </div>
     </div>
     <div class="mdl-cell mdl-cell--4-col mdl-cell--middle"></div>
     <div class="mdl-cell mdl-cell--8-col mdl-cell--middle">
