@@ -12,9 +12,10 @@ class Router {
     public $ViewPath;
     public $HandlerExists;
      
-    public function __construct(){
+    public function __construct() {
         global $_SERVER;
-        $parsed_url = explode('/', $_SERVER['REQUEST_URI']);
+        $uri = strtok($_SERVER['REQUEST_URI'], "?");
+        $parsed_url = explode('/', $uri);
         $this->Controller = (isset($parsed_url[1])&&!empty($parsed_url[1]))? $parsed_url[1] : 'Home';
         $this->View = (isset($parsed_url[2])&&!empty($parsed_url[2]))? $parsed_url[2] : 'Index';
         if(file_exists(CONTEXT_ROOT.'/Controllers/'.$this->Controller.'.inc')) {
