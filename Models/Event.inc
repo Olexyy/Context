@@ -2,7 +2,8 @@
 
 namespace Context;
 
-class Event extends Model{
+class Event extends Model {
+
   public $Date;
   public $Description;
   public $User_Id;

@@ -94,10 +94,10 @@ abstract class Model {
     return false;
   }
 
-  public static function Where (array $params = null) {
+  public static function Where ($expression) {
     $class_name = get_called_class();
     $model = new $class_name ();
-    $objects = self::$DB->Where($model, $params);
+    $objects = self::$DB->Where($model, $expression);
     if(is_array($objects) && !empty($objects)) {
       $models = array();
       foreach($objects as $object) {

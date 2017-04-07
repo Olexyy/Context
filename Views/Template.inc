@@ -44,8 +44,8 @@
                     <!-- Navigation -->
                     <nav class="mdl-navigation">
                         <a class="mdl-navigation__link" href="/Home/Index">Home</a>
-                        <a class="mdl-navigation__link" href="/Home/Add">Add record</a>
-                        <a class="mdl-navigation__link" href="/Home/View">View all</a>
+                        <a class="mdl-navigation__link" href="/Event/AddPage">Add event</a>
+                        <a class="mdl-navigation__link" href="/Event/All">All events</a>
                         <?php if(\Context\Utils::IsLoggedIn()): ?>
                             <a class="mdl-navigation__link" href="/User/Index">Users</a>
                         <?php endif; ?>

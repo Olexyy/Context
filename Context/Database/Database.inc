@@ -88,13 +88,8 @@ class Database {
     return $result;
   }
 
-  public function Where(Model $model, array $params = null) {
-    $query = "SELECT * FROM {$model->ClassShortName} WHERE ";
-    if(is_array($params) && !empty($params)) {
-      foreach ($params as $operand => $param) {
-        $query .= " $operand $param";
-      }
-    }
+  public function Where(Model $model, $expression) {
+    $query = "SELECT * FROM {$model->ClassShortName} WHERE {$expression}";
     $result = $this->Query($query);
     return $result;
   }
