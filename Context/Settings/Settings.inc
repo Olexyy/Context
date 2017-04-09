@@ -7,6 +7,9 @@ class Settings {
   const Production = 'production';
   const DevelopmentServerName = 'context.loc';
 
+  public $ReCaptchaBaseUrl = 'https://www.google.com/recaptcha/api/siteverify';
+  public $ReCaptchaBaseKeyPrivate = '6Lcr4ggUAAAAAFZ0V8CNXcWkHpsxGtv_SeW-QUPC';
+  public $ReCaptchaBaseKeyPublic = '6Lcr4ggUAAAAAH3PO219G1tBmGNrZ-gZcYnrUw3w';
   public $DB = array(
     Settings::Development => array(
       'host' => '127.0.0.1:3306',

@@ -25,4 +25,9 @@ class HTML {
   public static function input($type, $name = '', $value = '') {
     print "<input type='{$type}' name='{$name}' id='{$name}' value='{$value}' />";
   }
+  public static function reCaptcha() {
+    $key = \Context\Settings::Instance()->ReCaptchaBaseKeyPublic;
+    print "<div class='g-recaptcha' data-sitekey='{$key}'></div>";
+    print "<script src='https://www.google.com/recaptcha/api.js'></script>";
+  }
 }
