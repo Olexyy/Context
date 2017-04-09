@@ -23,6 +23,7 @@ $Model = $this->Model;
       <input id="password" type="password" name="password"/>
     </div>
     <div class="mdl-cell mdl-cell--4-col mdl-cell--middle"></div>
+    <?php HTML::reCaptcha() ?>
     <div class="mdl-cell mdl-cell--8-col mdl-cell--middle">
       <input class="mdl-button mdl-js-button text-white" name="SignUp" value="SignUp" type="submit">
     </div>

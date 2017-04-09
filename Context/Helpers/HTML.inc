@@ -30,4 +30,5 @@ class HTML {
     print "<div class='g-recaptcha' data-sitekey='{$key}'></div>";
     print "<script src='https://www.google.com/recaptcha/api.js'></script>";
   }
+
 }

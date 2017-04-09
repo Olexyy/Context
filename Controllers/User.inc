@@ -28,12 +28,15 @@ class UserController extends Controller {
 
   public function SignUp() {
     $params = $this->Context->Router->Post;
-    if(isset($params['username']) && isset($params['password']) && $params['SignUp'] == 'SignUp') {
-      $user = new User(array('Name' => $params['username'], 'Password' => Utils::EncryptPass($params['password'])));
-      User::Create($user);
-      Utils::SetUser($user->Id);
-      Utils::Redirect('/Home/Index');
+    if(Utils::ValidateReCaptcha($params['g-recaptcha-response'])) {
+      if (isset($params['username']) && isset($params['password']) && $params['SignUp'] == 'SignUp') {
+        $user = new User(array('Name' => $params['username'], 'Password' => Utils::EncryptPass($params['password'])));
+        User::Create($user);
+        Utils::SetUser($user->Id);
+        Utils::Redirect('/Home/Index');
+      }
     }
+    
   }
 
   public function Logout() {

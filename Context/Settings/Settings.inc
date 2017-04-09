@@ -8,8 +8,8 @@ class Settings {
   const DevelopmentServerName = 'context.loc';
 
   public $ReCaptchaBaseUrl = 'https://www.google.com/recaptcha/api/siteverify';
-  public $ReCaptchaBaseKeyPrivate = '6Lcr4ggUAAAAAFZ0V8CNXcWkHpsxGtv_SeW-QUPC';
-  public $ReCaptchaBaseKeyPublic = '6Lcr4ggUAAAAAH3PO219G1tBmGNrZ-gZcYnrUw3w';
+  public $ReCaptchaBaseKeyPrivate = '6LdWNhwUAAAAAA9nx1Djjgt-LyGWDqzVSe0eh1H5';
+  public $ReCaptchaBaseKeyPublic = '6LdWNhwUAAAAAC99Y1Ir2FYHBWPlGw2ofjtUGjMW';
   public $DB = array(
     Settings::Development => array(
       'host' => '127.0.0.1:3306',
