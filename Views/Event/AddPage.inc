@@ -5,11 +5,11 @@ $Model = $this->Model;
 
 <form class="add-form" action="/Event/Add" method="post">
   <?php 
-  HTML::mdlGrid();
-    HTML::mdlCell(8);
-      HTML::h3("Add event");
-    HTML::mdlClose();
-    HTML::mdlCell(4); HTML::mdlClose(); ?>
+  Html::mdlGrid();
+    Html::mdlCell(8);
+      Html::h3("Add event");
+    Html::mdlClose();
+    Html::mdlCell(4); Html::mdlClose(); ?>
     <div class="mdl-cell mdl-cell--8-col mdl-cell--middle">
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" value="<?php print date('Y-m-d')?>" name="date" type="date" id="date">
@@ -27,5 +27,5 @@ $Model = $this->Model;
     <div class="mdl-cell mdl-cell--8-col mdl-cell--middle">
       <input class="mdl-button mdl-js-button text-white" name="add_button" value="Add event" type="submit">
     </div>
-  <?php HTML::mdlClose() ?>
+  <?php Html::mdlClose() ?>
 </form>

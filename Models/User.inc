@@ -8,6 +8,7 @@ class User extends Model {
   public $Created;
   public $LastLogin;
   public $Data;
+  public $File_Id;
   
   protected function SchemaDefinition() {
     parent::SchemaDefinition();
@@ -16,5 +17,6 @@ class User extends Model {
     $this->AddField('Created', self::INT, self::NULL);
     $this->AddField('LastLogin', self::INT, self::NULL);
     $this->AddField('Data', self::TEXT, self::NULL);
+    $this->AddField('File_Id', self::INT, self::NULL);
   }
 }

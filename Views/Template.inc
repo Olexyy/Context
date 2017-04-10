@@ -1,4 +1,4 @@
-<html>
+<Html>
   <head>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -44,11 +44,11 @@
           <!-- Navigation -->
           <nav class="mdl-navigation">
             <?php
-              HTML::l('Home', '/Home/Index', 'mdl-navigation__link');
-              HTML::l('Add event', '/Event/AddPage', 'mdl-navigation__link');
-              HTML::l('All events', '/Event/All', 'mdl-navigation__link');
+              Html::l('Home', '/Home/Index', 'mdl-navigation__link');
+              Html::l('Add event', '/Event/AddPage', 'mdl-navigation__link');
+              Html::l('All events', '/Event/All', 'mdl-navigation__link');
               if(\Context\Utils::IsLoggedIn()) {
-                HTML::l('Users', '/User/Index', 'mdl-navigation__link');
+                Html::l('Users', '/User/Index', 'mdl-navigation__link');
               }
             ?>
           </nav>
@@ -58,19 +58,19 @@
         <span class="mdl-layout-title">Organizer</span>
         <nav class="mdl-navigation">
           <?php
-            HTML::l('Home', '/Home/Index', 'mdl-navigation__link');
-            HTML::l('Add event', '/Event/AddPage', 'mdl-navigation__link');
-            HTML::l('All events', '/Event/All', 'mdl-navigation__link');
+            Html::l('Home', '/Home/Index', 'mdl-navigation__link');
+            Html::l('Add event', '/Event/AddPage', 'mdl-navigation__link');
+            Html::l('All events', '/Event/All', 'mdl-navigation__link');
             if(\Context\Utils::IsLoggedIn()) {
-              HTML::l('Users', '/User/Index', 'mdl-navigation__link');
+              Html::l('Users', '/User/Index', 'mdl-navigation__link');
             }
           ?>
         </nav>
       </div>
-      <div class="message-board"> <?php HTML::printMessages() ?>  </div>
+      <div class="message-board"> <?php Html::printMessages() ?>  </div>
       <main class="mdl-layout__content render-content text-white">
          <?php $this->RenderView() ?>
       </main>
     </div>
   </body>
-</html>
+</Html>

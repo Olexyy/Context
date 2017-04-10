@@ -71,4 +71,29 @@ class Utils {
     }
     return false;
   }
+  public static function UploadFile($directory) {
+    global $_FILES;
+    $file_path = CONTEXT_ROOT. '/Static/' . $directory . '/';
+    if (move_uploaded_file($_FILES['file']['tmp_name'], $file_path . $_FILES['file']['name'])) {
+      foreach (new \DirectoryIterator($file_path . $_FILES['file']['name']) as $file_info) {
+        $extension = $file_info->getExtension();
+        $file_name = $file_info->getFilename();
+        $path = $file_info->getPath();
+        $size = $file_info->getSize();
+        $type = $file_info->getType();
+        $created = $file_info->getMTime();
+        $file = new File(array(
+          'Name' => $file_info->getFilename(),
+          'Extension' => $file_info->getExtension(),
+          'Path' => $file_info->getPath(),
+          'Size' => $file_info->getSize(),
+          'Created' => $file_info->getMTime(),
+          'Type' => $file_info->getType(),
+        ));
+        File::Create($file);
+        return $file->Id;
+      }
+    }
+    return false;
+  }
 }

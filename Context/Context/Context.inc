@@ -30,45 +30,50 @@ class Context {
   }
   // Main workflow.
   public function Run(){
-      if(!$this->GetController()) {
-          $this->Page404();
+    if(!$this->GetController()) {
+      $this->Page404();
+    }
+    else {
+      $this->ExecuteController();
+      if(!$this->GetView()) {
+        $this->Page404();
       }
       else {
-          $this->ExecuteController();
-          $this->Render();
+        $this->Render();
       }
+    }
   }
-  // Try to get instance of controller class and check it's handler method.
+  // Try to get instance of controller class and check its handler method.
   private function GetController() {
-      if($this->Router->HandlerExists) {
-          require_once $this->Router->ControllerPath;
-          $class = '\Context\\' . $this->Router->Controller . 'Controller';
-          $this->Controller = new $class($this);
-          if(is_object($this->Controller) && method_exists($this->Controller, $this->Router->View)) {
-              return true;
-          }
+    if($this->Router->ControllerExists) {
+      require_once $this->Router->ControllerPath;
+      $class = '\Context\\' . $this->Router->Controller . 'Controller';
+      $this->Controller = new $class($this);
+      if(is_object($this->Controller) && method_exists($this->Controller, $this->Router->View)) {
+        return true;
       }
-      return false;
+    }
+    return false;
+  }
+  private function GetView() {
+    return $this->Router->ViewExists;
   }
   // Execute defined method.
   private function ExecuteController() {
-      $this->Controller->{$this->Router->View}();
+    $this->Controller->{$this->Router->View}();
   }
   // Render page template.
   public function Render() {
-      require_once CONTEXT_ROOT.'/Views/Template.inc';
+    require_once CONTEXT_ROOT.'/Views/Template.inc';
   }
   // Render specific view.
-  public function RenderView(){
-      require_once CONTEXT_ROOT.'/Views/'. $this->Router->Controller .'/'.$this->Router->View.'.inc';
+  public function RenderView() {
+    require_once CONTEXT_ROOT.'/Views/'. $this->Router->Controller .'/'.$this->Router->View.'.inc';
   }
   // Render not found page.
   private function Page404() {
-      header('HTTP/1.0 404 Not Found');
-      header('Status: 404 Not Found');
-  }
-  // End procedures.
-  public function __destruct() {
-      //$this->Session->save_session();
+    header('HTTP/1.0 404 Not Found');
+    header('Status: 404 Not Found');
+    exit;
   }
 }
