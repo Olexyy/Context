@@ -1,10 +1,6 @@
 <?php
 // Model available in $this->model variable.
 $Model = $this->Model;
-if(!\Context\Utils::IsLoggedIn()) {
-  print "<h3> Please log in! </h3>";
-  goto eof;
-}
 ?>
 
 <form class="add-form" action="/Event/Add" method="post">
@@ -33,5 +29,3 @@ if(!\Context\Utils::IsLoggedIn()) {
     </div>
   <?php HTML::mdlClose() ?>
 </form>
-
-<?php eof: ?>

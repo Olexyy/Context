@@ -37,5 +37,8 @@ class HTML {
       }
     }
   }
+  public static function l($text, $path, $class) {
+    print "<a class='{$class}' href='{$path}'>{$text}</a>";
+  }
 
 }

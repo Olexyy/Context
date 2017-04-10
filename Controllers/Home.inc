@@ -5,7 +5,6 @@ namespace Context;
 class HomeController extends Controller {
   // $this->Context->Model array should be set.
   public function Index() {
-    Message::SetMessage('Hello world', Message::Notice);
     $this->Context->Model = '<h2>Welcome to Organizer!</h2>';
   }
   public function Add() {
@@ -17,7 +16,6 @@ class HomeController extends Controller {
     }
     if(!empty($this->Context->Router->Post)) {
       $values = $this->Context->Router->Post;
-      // todo add validation
       if(isset($values['date']) && isset($values['description']) && !empty($values['description'])) {
         $this->Context->Model[\Organizer::Key]->Add($values['date'], $values['description']);
         $this->Context->Session->SetSleep(\Organizer::Key, $this->Context->Model[\Organizer::Key]);

@@ -9,7 +9,8 @@ class EventController extends Controller {
       $this->Context->Model = Event::Where("User_Id={$user_id}");
     }
     else {
-      $this->Context->Model = false;
+      Message::SetMessage('Please, login or sign up');
+      Utils::Redirect('/Home/Index');
     }
   }
   public function AddPage() {
@@ -17,7 +18,8 @@ class EventController extends Controller {
       $this->Context->Model = Event::Where("User_Id={$user_id}");
     }
     else {
-      $this->Context->Model = false;
+      Message::SetMessage('Please, login or sign up');
+      Utils::Redirect('/Home/Index');
     }
   }
   public function Add() {

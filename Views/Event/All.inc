@@ -1,10 +1,6 @@
 <?php
 // Model available in $this->model variable.
 $Model = $this->Model;
-if(!\Context\Utils::IsLoggedIn()) {
-  print "<h3> Please log in! </h3>";
-  goto eof;
-}
 ?>
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--4-col  mdl-cell--middle">
@@ -38,4 +34,3 @@ if(!\Context\Utils::IsLoggedIn()) {
   <?php endforeach; ?>
 
 </div>
-<?php eof: ?>
