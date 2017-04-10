@@ -35,7 +35,7 @@ class HTML {
       foreach ($message_group as $message) {
         print "<div class='message message-line {$name}'>{$message}</div>";
       }
-    };
+    }
   }
 
 }

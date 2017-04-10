@@ -35,7 +35,6 @@ class Message {
     }
     return $count;
   }
-//TODO test
   public static function SetMessage($message, $type = self::Notice) {
     self::Initialize();
     if(in_array($type, self::MessageTypes())) {

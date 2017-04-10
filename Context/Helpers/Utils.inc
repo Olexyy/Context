@@ -49,6 +49,7 @@ class Utils {
 
   public static function Redirect($path) {
     header('location:'.$path);
+    exit;
   }
 
   public static function ValidateReCaptcha ($response) {

@@ -35,8 +35,15 @@ class UserController extends Controller {
         Utils::SetUser($user->Id);
         Utils::Redirect('/Home/Index');
       }
+      else {
+        Message::SetMessage('Incorrect input data.');
+        Utils::Redirect('/User/SignUpPage');
+      }
     }
-    
+    else {
+      Message::SetMessage('ReCaptcha not solved.');
+      Utils::Redirect('/User/SignUpPage');
+    }
   }
 
   public function Logout() {
