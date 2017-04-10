@@ -5,8 +5,8 @@ namespace Context;
 class EventController extends Controller {
   // $this->Context->Model array should be set.
   public function All() {
-    if($user_id = Utils::GetUser($entity = false)) {
-      $this->Context->Model = Event::Where("User_Id={$user_id}");
+    if($user = Utils::GetUser()) {
+      $this->Context->Model = $user->Events;
     }
     else {
       Message::SetMessage('Please, login or sign up');

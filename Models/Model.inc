@@ -28,6 +28,28 @@ abstract class Model {
   public $ClassShortName;
   public $Fields;
 
+  public function __get($property) {
+    if(substr($property, -1) == 's') {
+      $className = substr_replace($property, "", -1);
+      $fullClassName = "\\Context\\{$className}";
+      if(class_exists($fullClassName)) {
+        $model = new $fullClassName ();
+        $fieldName = $this->ClassShortName.'_Id';
+        $expression = "{$fieldName}={$this->Id}";
+        $objects = self::$DB->Where($model, $expression);
+        if(is_array($objects)) {
+          $models = array();
+          foreach($objects as $object) {
+            $model = new $fullClassName ();
+            $models[]= self::ObjectToModel($object, $model);
+          }
+          return $models;
+        }
+      }
+    }
+    return array();
+  }
+
   public final static function SetUp() {
     if(self::$DB = Database::Instance()) {
       self::$Models = array();
