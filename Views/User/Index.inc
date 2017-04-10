@@ -2,7 +2,6 @@
 // Model available in $this->model variable.
 $Model = $this->Model;
 
-(count($this->Messages))? print 'Messages: '. implode('<br>', $this->Messages) : print '';
 ?>
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--2-col"></div>

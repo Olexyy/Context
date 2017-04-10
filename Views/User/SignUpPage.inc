@@ -1,7 +1,6 @@
 <?php
 // Model available in $this->model variable.
 $Model = $this->Model;
-//(count($this->Messages))? print 'Messages: '. implode('<br>', $this->Messages) : print '';
 ?>
 <form class="add-form" action="/User/SignUp" method="post">
   <div class="mdl-grid">

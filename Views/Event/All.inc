@@ -1,7 +1,6 @@
 <?php
 // Model available in $this->model variable.
 $Model = $this->Model;
-//(count($this->Messages))? print 'Messages: '. implode('<br>', $this->Messages) : print '';
 if(!\Context\Utils::IsLoggedIn()) {
   print "<h3> Please log in! </h3>";
   goto eof;

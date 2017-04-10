@@ -30,5 +30,12 @@ class HTML {
     print "<div class='g-recaptcha' data-sitekey='{$key}'></div>";
     print "<script src='https://www.google.com/recaptcha/api.js'></script>";
   }
+  public static function printMessages() {
+    foreach (\Context\Message::GetMessages() as $name => $message_group) {
+      foreach ($message_group as $message) {
+        print "<div class='message message-line {$name}'>{$message}</div>";
+      }
+    };
+  }
 
 }

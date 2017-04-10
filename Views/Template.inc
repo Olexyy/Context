@@ -60,6 +60,7 @@
                     <a class="mdl-navigation__link" href="/Home/View">View all</a>
                 </nav>
             </div>
+            <div class="message-board"> <?php HTML::printMessages() ?>  </div>
             <main class="mdl-layout__content render-content text-white">
                <?php $this->RenderView() ?>
             </main>

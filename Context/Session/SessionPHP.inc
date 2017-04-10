@@ -13,7 +13,7 @@ class SessionPHP {
     $this->SessionId = session_id();
   }
 
-  public  function __destruct() {
+  public function __destruct() {
     session_write_close();
   }
 
