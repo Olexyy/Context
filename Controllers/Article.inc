@@ -16,20 +16,19 @@ class ArticleController extends Controller {
   public function Add() {
     $user_id = Utils::RegisteredAccess(false);
     $params = $this->Context->Router->Post;
-    if(isset($params['title']) && isset($params['description']) && isset($params['file']) && $params['Add'] == 'Add') {
+    if(isset($params['title']) && isset($params['description']) && $params['Add'] == 'Add') {
       $article = new Article(array('Title' => $params['title'], 'Description' => $params['description']));
       $article->User_Id = $user_id;
       if($file_id = Utils::UploadFile($this->Context->Router->Controller)) {
         $article->File_Id = $file_id;
       }
-      Article::Create($article);
-      Message::SetMessage('Article created.');
-      Utils::Redirect('/Article/Index');
+      if(Article::Create($article)) {
+        Message::SetMessage('Article created.');
+        Utils::Redirect('/Article/Index');
+      }
     }
-    else {
-      Message::SetMessage('Incorrect credentials.');
-      Utils::Redirect('/Article/AddPage');
-    }
+    Message::SetMessage('Incorrect input data.');
+    Utils::Redirect('/Article/AddPage');
   }
 
   public function SignUp() {
