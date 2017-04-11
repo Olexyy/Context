@@ -25,8 +25,11 @@ class Html {
   public static function mdlTextField() {
     print "<div class='mdl-textfield mdl-js-textfield'>";
   }
-  public static function input($type, $name = '', $value = '') {
-    print "<input class='mdl-textfield__input' type='{$type}' name='{$name}' id='{$name}' value='{$value}' />";
+  public static function input($type, $name = '', $value = '', $class = '') {
+    print "<input class='mdl-textfield__input {$class}' type='{$type}' name='{$name}' id='{$name}' value='{$value}' />";
+  }
+  public static function textarea($name='', $value ='', $class='', $rows = 3) {
+    print "<textarea class='mdl-textfield__input {$class}' name='{$name}' rows= '{$rows}' id='{$name}'>{$value}</textarea>";
   }
   public static function labelFor($for = '', $content = '', $class ='') {
     print "<label for='{$for}' class='mdl-textfield__label {$class}'>{$content}</label>";

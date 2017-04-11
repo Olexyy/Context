@@ -49,6 +49,7 @@
               Html::l('All events', '/Event/All', 'mdl-navigation__link');
               if(\Context\Utils::IsLoggedIn()) {
                 Html::l('Users', '/User/Index', 'mdl-navigation__link');
+                Html::l('Articles', '/Article/Index', 'mdl-navigation__link');
               }
             ?>
           </nav>
