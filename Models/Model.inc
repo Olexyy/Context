@@ -167,13 +167,14 @@ abstract class Model {
       if(isset($object->{$field->Name})) {
         $model->{$field->Name} = $object->{$field->Name};
         if($class = self::ExtractClass($field->Name)) {
-          $model->{$class} = $class::Read($model->{$field->Name});
+          $fullClassName = "\\Context\\{$class}";
+          $model->{$class} = $fullClassName::Read($model->{$field->Name});
         }
       }
     }
     return $model;
   }
-  
+
   private static function ExtractClass($field) {
     $tryParse = explode('_', $field);
     if(is_array($tryParse) && count($tryParse) == 2 && $tryParse[1] == 'Id') {
