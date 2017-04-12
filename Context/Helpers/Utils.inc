@@ -12,11 +12,17 @@ class Utils {
   }
 
   public static function IsLoggedIn() {
+    if(!Settings::Instance()->UseDB) {
+      return false;
+    }
     $user_id = Context::Application()->Session->Get('User');
     return isset($user_id );
   }
 
   public static function GetUser($entity = true) {
+    if(!Settings::Instance()->UseDB) {
+      return false;
+    }
     $user_id = Context::Application()->Session->Get('User');
     if(!isset($user_id)) {
       return false;
@@ -55,7 +61,6 @@ class Utils {
   public static function ValidateReCaptcha ($response) {
     $url = Settings::Instance()->ReCaptchaBaseUrl;
     $key = Settings::Instance()->ReCaptchaBaseKeyPrivate;
-    //$response = $_POST['g-recaptcha-response'];
     $ip = $_SERVER['REMOTE_ADDR'];
     $url_data = $url.'?secret='.$key.'&response='.$response.'&remoteip='.$ip;
     $curl = curl_init();

@@ -9,6 +9,8 @@ Html::mdlGrid();
     Html::p('You have no articles.');
   }
   foreach ($Model as $article) {
-    ArticleHelper::mdlArticleEdit($article->Title, $article->Description, '/Article/EditPage?id='.$article->Id);
+    // todo teaser here
+    ArticleHelper::mdlArticle($article->Title, $article->Description, '/Article/EditPage?id='.$article->Id);
+    ArticleHelper::DetailsLink($article->Id);
   }
 Html::mdlClose();

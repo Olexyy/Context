@@ -9,11 +9,20 @@ class ArticleController extends Controller {
     $this->Context->Model = $user->Articles;
   }
 
-  public function ViewPage() {
+  public function All() {
     Utils::RegisteredAccess(false);
+    $this->Context->Model = Article::All();
+  }
+
+  public function ViewPage() {
+    $user_id = Utils::RegisteredAccess(false);
     $params = $this->Context->Router->Get;
     if(isset($params['id']) && ($model = Article::Read($params['id']))) {
       $this->Context->Model = $model;
+      if($user_id != $model->User_Id) {
+        $this->Context->Model->NotAuthor = true;
+        $this->Context->Model->CurrentUserId = $user_id;
+      }
     }
     else {
       Utils::Redirect('/Home/Index');

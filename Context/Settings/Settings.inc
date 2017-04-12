@@ -8,8 +8,8 @@ class Settings {
   const DevelopmentServerName = 'context.loc';
 
   public $ReCaptchaBaseUrl = 'https://www.google.com/recaptcha/api/siteverify';
-  public $ReCaptchaBaseKeyPrivate = '6LdWNhwUAAAAAA9nx1Djjgt-LyGWDqzVSe0eh1H5';
-  public $ReCaptchaBaseKeyPublic = '6LdWNhwUAAAAAC99Y1Ir2FYHBWPlGw2ofjtUGjMW';
+  public $ReCaptchaBaseKeyPrivate = '6Ld0zRwUAAAAAMRCdz8rOZqbKuj_pxyqRh54cO1a';
+  public $ReCaptchaBaseKeyPublic = '6Ld0zRwUAAAAANbA2PDxxO0QVaF39xjxf02yVq-5';
   public $DB = array(
     Settings::Development => array(
       'host' => '127.0.0.1:3306',
@@ -18,11 +18,17 @@ class Settings {
       'database' => 'context',
     ),
     Settings::Production => array(
+      'host' => 'fdb17.freehostingeu.com',
+      'user' => '2339325_context',
+      'password' => '1qaz2wsx!QAZ@WSX',
+      'database' => '2339325_context',
+    ),
+    /*Settings::Production => array(
       'host' => 'sql213.rf.gd',
       'user' => 'rfgd_19931571',
       'password' => 'vgXtFyzC',
       'database' => 'rfgd_19931571_context',
-    ),
+    ),*/
   );
   public $UseDB = true;
   public $Environment;

@@ -49,3 +49,16 @@
 .article-card-wide > .mdl-card__menu {
     color: #fff;
 }
+.comments-list-three.mdl-list {
+    width: 100%;
+}
+.add-form, .edit-form {
+    background-color: rgba( 0, 0, 0, 0.4);
+    color: white;
+    border-radius: 5px;
+    margin: 3px auto;
+    padding: 7px;
+}
+.font-color{
+    color: white;
+}

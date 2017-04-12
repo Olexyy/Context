@@ -8,7 +8,7 @@ class CommentController extends Controller {
     $user_id = Utils::RegisteredAccess(false);
     $params = $this->Context->Router->Post;
     if(isset($params['id']) && isset($params['text']) && $params['Add'] == 'Add') {
-      $comment = new Comment(array('Text' => $params['title'], 'Description' => $params['description']));
+      $comment = new Comment(array('Text' => $params['text']));
       $comment->User_Id = $user_id;
       $comment->Article_Id = $params['id'];
       if(Comment::Create($comment)) {
@@ -23,11 +23,11 @@ class CommentController extends Controller {
   public function Delete() {
     $user_id = Utils::RegisteredAccess(false);
     $params = $this->Context->Router->Get;
-    if(isset($params['cid']) && ($comment = Comment::Read($params['cid']))) {
+    if(isset($params['aid']) && isset($params['cid']) && ($comment = Comment::Read($params['aid']))) {
       if($comment->User_Id == $user_id) {
         if(Comment::Delete($comment)) {
           Message::SetMessage('Comment deleted.');
-          Utils::Redirect('/Article/ViewPage?id='.$params['aid']);
+          Utils::Redirect('/Article/ViewPage?id='.$params['cid']);
         }
       }
     }
