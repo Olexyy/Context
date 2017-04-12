@@ -8,7 +8,7 @@
     color: white;
 }
 .render-content {
-    padding: 100px 50px;
+    padding: 70px 50px;
     text-align: center;
 }
 .text-white {
@@ -37,4 +37,15 @@
     border-radius: 5px;
     margin: 3px auto;
     padding: 7px;
+}
+.article-card-wide.mdl-card {
+    width: 100%;
+}
+.article-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 126px;
+    background: cadetblue center / cover;
+}
+.article-card-wide > .mdl-card__menu {
+    color: #fff;
 }

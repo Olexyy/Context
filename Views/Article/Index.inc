@@ -6,12 +6,10 @@ Html::mdlGrid();
   Html::mdlCell(8);
     Html::h2('Articles');
   Html::mdlClose();
-  Html::mdlCell(4);Html::mdlClose();
   if(empty($Model)) {
     Html::p('You have no articles.');
   }
   foreach ($Model as $article) {
-    Html::h3($article->Title);
-    Html::p($article->Description);
+    ArticleHelper::mdlArticle($article->Title, $article->Description, '/Article/EditPage?id='.$article->Id);
   }
 Html::mdlClose();

@@ -101,4 +101,11 @@ class Utils {
       Utils::Redirect('/Home/Index');
     }
   }
+  public static function Autoload($directory) {
+    foreach (new \DirectoryIterator($directory) as $file_info) {
+      if (!$file_info->isDot() && $file_info->isFile()) {
+        require_once $file_info->getPathname();
+      }
+    }
+  }
 }

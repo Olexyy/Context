@@ -13,6 +13,17 @@ class ArticleController extends Controller {
     Utils::RegisteredAccess(false);
   }
 
+  public function EditPage() {
+    Utils::RegisteredAccess(false);
+    $params = $this->Context->Router->Get;
+    if(isset($params['id']) && ($model = Article::Read($params['id']))) {
+      $this->Context->Model = $model;
+    }
+    else {
+      Utils::Redirect('/Home/Index');
+    }
+  }
+
   public function Add() {
     $user_id = Utils::RegisteredAccess(false);
     $params = $this->Context->Router->Post;
@@ -31,35 +42,24 @@ class ArticleController extends Controller {
     Utils::Redirect('/Article/AddPage');
   }
 
-  public function SignUp() {
+  public function Edit() {
+    Utils::RegisteredAccess(false);
     $params = $this->Context->Router->Post;
-    if(Utils::ValidateReCaptcha($params['g-recaptcha-response'])) {
-      if (isset($params['username']) && isset($params['password']) && $params['SignUp'] == 'SignUp') {
-        $user = new User(array('Name' => $params['username'], 'Password' => Utils::EncryptPass($params['password'])));
+    if(isset($params['id']) && isset($params['title']) && isset($params['description']) && $params['Edit'] == 'Edit') {
+      if($article = Article::Read($params['id'])) {
         if($file_id = Utils::UploadFile($this->Context->Router->Controller)) {
-          $user->File_Id = $file_id;
+          $article->File_Id = $file_id;
         }
-        User::Create($user);
-        Utils::SetUser($user->Id);
-        Utils::Redirect('/Home/Index');
+        $article->Title = $params['title'];
+        $article->Description = $params['description'];
+        if(Article::Update($article)) {
+          Message::SetMessage('Article updated.');
+          Utils::Redirect('/Article/Index');
+        }
       }
-      else {
-        Message::SetMessage('Incorrect input data.');
-        Utils::Redirect('/User/SignUpPage');
-      }
     }
-    else {
-      Message::SetMessage('ReCaptcha not solved.');
-      Utils::Redirect('/User/SignUpPage');
-    }
-  }
-
-  public function Logout() {
-    $params = $this->Context->Router->Post;
-    if(isset($params['user']) && $params['Logout'] == 'Logout') {
-      Utils::UnsetUser($params['user']);
-      Utils::Redirect('/Home/Index');
-    }
+    Message::SetMessage('Incorrect input data.');
+    Utils::Redirect('/Article/EditPage?id='.$params['id']);
   }
 
   public function Delete() {
