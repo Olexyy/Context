@@ -13,7 +13,7 @@ class CommentController extends Controller {
       $comment->Article_Id = $params['id'];
       if(Comment::Create($comment)) {
         Message::SetMessage('Comment added.');
-        Utils::Redirect('/Article/View?id='.$params['id']);
+        Utils::Redirect('/Article/ViewPage?id='.$params['id']);
       }
     }
     Message::SetMessage('Incorrect input data.');
@@ -27,7 +27,7 @@ class CommentController extends Controller {
       if($comment->User_Id == $user_id) {
         if(Comment::Delete($comment)) {
           Message::SetMessage('Comment deleted.');
-          Utils::Redirect('/Article/View?id='.$params['aid']);
+          Utils::Redirect('/Article/ViewPage?id='.$params['aid']);
         }
       }
     }

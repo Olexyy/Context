@@ -3,10 +3,21 @@
 namespace Context;
 
 class ArticleController extends Controller {
-  // $this->Context->Model array should be set.
+
   public function Index() {
     $user = Utils::RegisteredAccess();
     $this->Context->Model = $user->Articles;
+  }
+
+  public function ViewPage() {
+    Utils::RegisteredAccess(false);
+    $params = $this->Context->Router->Get;
+    if(isset($params['id']) && ($model = Article::Read($params['id']))) {
+      $this->Context->Model = $model;
+    }
+    else {
+      Utils::Redirect('/Home/Index');
+    }
   }
 
   public function AddPage() {
