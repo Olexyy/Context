@@ -59,9 +59,9 @@ class Utils {
   }
 
   public static function ValidateReCaptcha ($response) {
-    $url = Settings::Instance()->ReCaptchaBaseUrl;
+    //$url = Settings::Instance()->ReCaptchaBaseUrl;
     $key = Settings::Instance()->ReCaptchaBaseKeyPrivate;
-    $ip = $_SERVER['REMOTE_ADDR'];
+    /*$ip = $_SERVER['REMOTE_ADDR'];
     $url_data = $url.'?secret='.$key.'&response='.$response.'&remoteip='.$ip;
     $curl = curl_init();
     curl_setopt($curl,CURLOPT_URL,$url_data);
@@ -74,7 +74,10 @@ class Utils {
     if($result->success) {
       return true;
     }
-    return false;
+    return false;*/
+    $reCAPTCHA = new \Library\ReCaptcha();
+    $reCAPTCHA->setSecretKey($key);
+    return $reCAPTCHA->isValid($response);
   }
   public static function UploadFile($directory) {
     global $_FILES;

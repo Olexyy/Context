@@ -19,20 +19,20 @@ class Html {
   public static function p($content = '', $class ='') {
     print "<p class='{$class}'>{$content}</p>";
   }
-  public static function mdlTextFieldFloating() {
-    print "<div class='mdl-textfield mdl-js-textfield mdl-textfield--floating-label'>";
+  public static function mdlTextFieldFloating($class ='') {
+    print "<div class='font-color mdl-textfield mdl-js-textfield mdl-textfield--floating-label {$class}'>";
   }
-  public static function mdlTextField() {
-    print "<div class='mdl-textfield mdl-js-textfield'>";
+  public static function mdlTextField($class ='') {
+    print "<div class='font-color mdl-textfield mdl-js-textfield {$class}'>";
   }
   public static function input($type, $name = '', $value = '', $class = '') {
-    print "<input class='mdl-textfield__input {$class}' type='{$type}' name='{$name}' id='{$name}' value='{$value}' />";
+    print "<input class='font-color mdl-textfield__input {$class}' type='{$type}' name='{$name}' id='{$name}' value='{$value}' />";
   }
   public static function textarea($name='', $value ='', $class='', $rows = 3) {
-    print "<textarea class='mdl-textfield__input {$class}' name='{$name}' rows= '{$rows}' id='{$name}'>{$value}</textarea>";
+    print "<textarea class='font-color mdl-textfield__input {$class}' name='{$name}' rows= '{$rows}' id='{$name}'>{$value}</textarea>";
   }
   public static function labelFor($for = '', $content = '', $class ='') {
-    print "<label for='{$for}' class='mdl-textfield__label {$class}'>{$content}</label>";
+    print "<label for='{$for}' class='font-color mdl-textfield__label {$class}'>{$content}</label>";
   }
   public static function reCaptcha() {
     $key = \Context\Settings::Instance()->ReCaptchaBaseKeyPublic;
@@ -56,7 +56,7 @@ class Html {
     print "</form>";
   }
   public static function button($name, $value, $class ='') {
-    print "<input class='mdl-button mdl-js-button {$class}' name='{$name}' value='{$value}' type='submit'>";
+    print "<input class='font-color mdl-button mdl-js-button {$class}' name='{$name}' value='{$value}' type='submit'>";
   }
   public static function mdlCard($title = '', $description ='', $edit_path = "", $delete_path = "", $edit_text = "Edit") {
     print

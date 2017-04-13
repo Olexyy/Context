@@ -12,3 +12,4 @@ require_once CONTEXT_ROOT . '/Controllers/Controller.inc';
 require_once CONTEXT_ROOT . '/Models/Model.inc';
 \Context\Utils::Autoload(CONTEXT_ROOT . '/Models');
 \Context\Utils::Autoload(CONTEXT_ROOT . '/Helpers');
+\Context\Utils::Autoload(CONTEXT_ROOT . '/Library');
