@@ -23,12 +23,6 @@ class Settings {
       'password' => '1qaz2wsx!QAZ@WSX',
       'database' => '2339325_context',
     ),
-    /*Settings::Production => array(
-      'host' => 'sql213.rf.gd',
-      'user' => 'rfgd_19931571',
-      'password' => 'vgXtFyzC',
-      'database' => 'rfgd_19931571_context',
-    ),*/
   );
   public $UseDB = true;
   public $Environment;
