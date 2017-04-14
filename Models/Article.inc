@@ -8,6 +8,7 @@ class Article extends Model {
   public $Description;
   public $User_Id;
   public $File_Id;
+  public $Created;
   public $Data;
 
   protected function SchemaDefinition() {
@@ -16,6 +17,7 @@ class Article extends Model {
     $this->AddField('Description', self::NVARCHAR, self::NOT_NULL);
     $this->AddField('User_Id', self::INT, self::NOT_NULL);
     $this->AddField('File_Id', self::INT, self::NULL);
+    $this->AddField('Created', self::INT, self::NULL);
     $this->AddField('Data', self::TEXT, self::NULL);
   }
 

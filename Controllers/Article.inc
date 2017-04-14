@@ -53,6 +53,7 @@ class ArticleController extends Controller {
       if($file_id = Utils::UploadFile($this->Context->Router->Controller)) {
         $article->File_Id = $file_id;
       }
+      $article->Created = time();
       if(Article::Create($article)) {
         Message::SetMessage('Article created.');
         Utils::Redirect('/Article/Index');

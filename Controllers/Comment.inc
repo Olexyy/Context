@@ -11,6 +11,7 @@ class CommentController extends Controller {
       $comment = new Comment(array('Text' => $params['text']));
       $comment->User_Id = $user_id;
       $comment->Article_Id = $params['id'];
+      $comment->Created = time();
       if(Comment::Create($comment)) {
         Message::SetMessage('Comment added.');
         Utils::Redirect('/Article/ViewPage?id='.$params['id']);
