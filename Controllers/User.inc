@@ -47,8 +47,8 @@ class UserController extends Controller {
       }
     }
     else {
-      Message::SetMessage('ReCaptcha not solved.');
-      Utils::Redirect('/User/SignUpPage');
+      //Message::SetMessage('ReCaptcha not solved.');
+      //Utils::Redirect('/User/SignUpPage');
     }
   }
 
