@@ -1,14 +1,20 @@
 <?php
 $Model = $this->Model;
 Html::mdlGrid();
-  Html::l('Add article', '/Article/AddPage', 'mdl-navigation__link text-white');
-  Html::mdlCell(8);
-    Html::h2('Articles');
+Html::mdlCell(12);
+  Html::h2('Articles');
+Html::mdlClose();
+if(!$Model) {
+  Html::mdlCell(12);
+    Html::p('There are no articles in list.');
   Html::mdlClose();
-  if(empty($Model)) {
-    Html::p('You have no articles.');
-  }
+}
+else {
+  ArticleHelper::mdlArticlesList();
   foreach ($Model as $article) {
-    ArticleHelper::mdlArticleEdit($article->Title, $article->Description, '/Article/EditPage?id='.$article->Id);
+    ArticleHelper::mdlArticleTeaser($article->Title, \Context\Utils::Tease($article->Description), $article->Id);
   }
+  ArticleHelper::mdlArticlesListClose();
+}
+
 Html::mdlClose();

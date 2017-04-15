@@ -5,20 +5,25 @@ namespace Context;
 class ArticleController extends Controller {
 
   public function Index() {
+    $this->Context->Model = Article::All();
+  }
+
+  public function All() {
     $user = Utils::RegisteredAccess();
     $this->Context->Model = $user->Articles;
   }
 
-  public function All() {
-    Utils::RegisteredAccess(false);
-    $this->Context->Model = Article::All();
-  }
-
   public function ViewPage() {
-    $user_id = Utils::RegisteredAccess(false);
+    $user_id = Utils::GetUser(false);
     $params = $this->Context->Router->Get;
     if(isset($params['id']) && ($model = Article::Read($params['id']))) {
       $this->Context->Model = $model;
+      if(!$user_id) {
+        $this->Context->Model->LoggedIn = false;
+      }
+      else {
+        $this->Context->Model->LoggedIn = true;
+      }
       if($user_id != $model->User_Id) {
         $this->Context->Model->NotAuthor = true;
         $this->Context->Model->CurrentUserId = $user_id;
@@ -56,7 +61,7 @@ class ArticleController extends Controller {
       $article->Created = time();
       if(Article::Create($article)) {
         Message::SetMessage('Article created.');
-        Utils::Redirect('/Article/Index');
+        Utils::Redirect('/Article/All');
       }
     }
     Message::SetMessage('Incorrect input data.');
@@ -85,9 +90,14 @@ class ArticleController extends Controller {
 
   public function Delete() {
     $params = $this->Context->Router->Get;
-    if(isset($params['user']) && Utils::ValidateId($params['user'])) {
-      if(User::Delete($params['user'])) {
-        Utils::Redirect('/User/Index');
+    if(isset($params['id']) && Utils::ValidateId($params['user'])) {
+      if($article = Article::Read($params['id'])) {
+        if(Article::Delete($params['id'])) {
+          foreach($article->Comments as $comment) {
+            Comment::Delete($comment);
+          }
+          Utils::Redirect('/Article/All');
+        }
       }
     }
   }

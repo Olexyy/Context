@@ -2,6 +2,27 @@
 
 class ArticleHelper {
 
+  public static function mdlArticlesList($class = '') {
+    print "<ul class='comments-list-three mdl-list {$class}'>";
+  }
+
+  public static function mdlArticlesListClose() {
+    print "</ul>";
+  }
+
+  public static function mdlArticleTeaser($title = '', $description ='', $id = '') {
+    print
+      "<li class='mdl-list__item mdl-list__item--three-line'>
+        <span class='mdl-list__item-primary-content'>
+          <span>{$title}</span>
+          <span class='mdl-list__item-text-body'>
+            {$description}
+          </span>
+        </span>
+        <a class='mdl-list__item-secondary-action' href='/Article/ViewPage?id={$id}'><i class='material-icons'>forward</i></a>
+      </li>";
+  }
+
   public static function mdlArticle($title = '', $description ='') {
     print
       "<div class='article-card-wide mdl-card mdl-shadow--2dp'>

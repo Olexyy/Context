@@ -11,14 +11,6 @@ class Utils {
     return false;
   }
 
-  public static function IsLoggedIn() {
-    if(!Settings::Instance()->UseDB) {
-      return false;
-    }
-    $user_id = Context::Application()->Session->Get('User');
-    return isset($user_id );
-  }
-
   public static function GetUser($entity = true) {
     if(!Settings::Instance()->UseDB) {
       return false;
@@ -28,6 +20,17 @@ class Utils {
       return false;
     }
     return ($entity)? User::Read($user_id) : $user_id;
+  }
+
+  public static function IsAdmin() {
+    if($user_id = self::GetUser(false)) {
+      return $user_id == 1;
+    }
+    return false;
+  }
+
+  public static function IsLoggedIn() {
+    return (bool) self::GetUser(false);
   }
 
   public static function SetUser($id) {
@@ -122,5 +125,17 @@ class Utils {
         require_once $file_info->getPathname();
       }
     }
+  }
+  public static function Tease($text, $count = 25) {
+    $output = '';
+    for( $i = 0; $i < strlen($text); $i++ )  {
+      if($i < $count) {
+        $output .= $text[$i];
+      }
+      else {
+        break;
+      }
+    }
+    return $output . '...';
   }
 }

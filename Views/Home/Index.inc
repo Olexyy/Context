@@ -1,5 +1,3 @@
 <?php
-// Model available in $this->model variable.
-$Model = $this->Model;
-
-print $Model;
+Html::h2('Welcome on article portal');
+Html::l('View interesting articles.', '/Article/Index', 'mdl-navigation__link text-white');

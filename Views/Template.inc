@@ -12,7 +12,7 @@
       <header class="mdl-layout__header mdl-layout__header--transparent">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title text-muted"><h3>Organizer</h3></span>
+          <span class="mdl-layout-title text-muted"><h3>Articles</h3></span>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <!-- Textfield with Floating Label -->
@@ -45,11 +45,13 @@
           <nav class="mdl-navigation">
             <?php
               Html::l('Home', '/Home/Index', 'mdl-navigation__link');
-              Html::l('Add event', '/Event/AddPage', 'mdl-navigation__link');
-              Html::l('All events', '/Event/All', 'mdl-navigation__link');
+              Html::l('Articles', '/Article/Index', 'mdl-navigation__link');
+              Html::l('About', '/Home/About', 'mdl-navigation__link');
               if(\Context\Utils::IsLoggedIn()) {
+                Html::l('My articles', '/Article/All', 'mdl-navigation__link');
+              }
+              if(\Context\Utils::IsAdmin()) {
                 Html::l('Users', '/User/Index', 'mdl-navigation__link');
-                Html::l('Articles', '/Article/Index', 'mdl-navigation__link');
               }
             ?>
           </nav>
