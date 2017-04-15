@@ -90,16 +90,19 @@ class ArticleController extends Controller {
 
   public function Delete() {
     $params = $this->Context->Router->Get;
-    if(isset($params['id']) && Utils::ValidateId($params['user'])) {
+    if(isset($params['id']) && Utils::ValidateId($params['id'])) {
       if($article = Article::Read($params['id'])) {
         if(Article::Delete($params['id'])) {
           foreach($article->Comments as $comment) {
             Comment::Delete($comment);
           }
-          Utils::Redirect('/Article/All');
+          Message::SetMessage('Article deleted');
+          Utils::RedirectToReferrer();
         }
       }
     }
+    Message::SetMessage('Article can not be deleted');
+    Utils::RedirectToReferrer();
   }
 
 }

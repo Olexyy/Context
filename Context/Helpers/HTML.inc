@@ -10,11 +10,17 @@ class Html {
   public static function mdlClose() {
     print "</div>";
   }
+  public static function h4($content = '', $class ='') {
+    print "<h4 class='{$class}'>{$content}</h4>";
+  }
   public static function h3($content = '', $class ='') {
     print "<h3 class='{$class}'>{$content}</h3>";
   }
   public static function h2($content = '', $class ='') {
     print "<h2 class='{$class}'>{$content}</h2>";
+  }
+  public static function h1($content = '', $class ='') {
+    print "<h1 class='{$class}'>{$content}</h1>";
   }
   public static function p($content = '', $class ='') {
     print "<p class='{$class}'>{$content}</p>";

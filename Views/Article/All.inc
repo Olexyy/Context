@@ -12,11 +12,10 @@ Html::mdlGrid();
       Html::p('You have no articles.');
     Html::mdlClose();
   }
-  Html::mdlCell(12);
   foreach ($Model as $article) {
-
-    ArticleHelper::mdlArticleEdit($article->Title, $article->Description, '/Article/Delete?id='.$article->Id);
-    ArticleHelper::DetailsLink($article->Id);
+    Html::mdlCell(12);
+      ArticleHelper::mdlArticleEdit($article->Title, $article->Description, '/Article/EditPage?id='.$article->Id, '/Article/Delete?id='.$article->Id);
+      ArticleHelper::DetailsLink($article->Id);
+    Html::mdlClose();
   }
-  Html::mdlClose();
 Html::mdlClose();

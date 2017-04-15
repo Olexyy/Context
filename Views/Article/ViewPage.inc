@@ -11,7 +11,7 @@ Html::mdlGrid();
     ArticleHelper::mdlArticle($Model->Title, $Model->Description);
   }
   else {
-    ArticleHelper::mdlArticleEdit($Model->Title, $Model->Description, '/Article/EditPage?id='.$Model->Id);
+    ArticleHelper::mdlArticleEdit($Model->Title, $Model->Description, '/Article/EditPage?id='.$Model->Id, '/Article/Delete?id='.$Model->Id);
   }
   CommentHelper::mdlCommentsList();
   foreach ($Model->Comments as $comment) {

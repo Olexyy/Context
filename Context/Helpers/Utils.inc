@@ -61,6 +61,11 @@ class Utils {
     exit;
   }
 
+  public static function RedirectToReferrer() {
+    header('location:'.$_SERVER['HTTP_REFERER']);
+    exit;
+  }
+
   public static function ValidateReCaptcha ($response) {
     if(Settings::Instance()->Environment == Settings::Development) {
       $url = Settings::Instance()->ReCaptchaBaseUrl;
