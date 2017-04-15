@@ -79,7 +79,10 @@ abstract class Model {
 
   public function Initialize() {
     self::$DB->CreateTable($this);
+    self::Seed();
   }
+
+  protected function Seed() { }
 
   protected function SetName() {
     $reflection = new \ReflectionClass($this);

@@ -19,4 +19,10 @@ class User extends Model {
     $this->AddField('Data', self::TEXT, self::NULL);
     $this->AddField('File_Id', self::INT, self::NULL);
   }
+
+  protected function Seed() {
+    parent::Seed();
+    $user = new User(array('Name' => 'admin', 'Password' => Utils::EncryptPass('admin'), 'Created' => time()));
+    User::Create($user);
+  }
 }

@@ -58,15 +58,18 @@
         </div>
       </header>
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Organizer</span>
+        <span class="mdl-layout-title">Articles</span>
         <nav class="mdl-navigation">
           <?php
             Html::l('Home', '/Home/Index', 'mdl-navigation__link');
-            Html::l('Add event', '/Event/AddPage', 'mdl-navigation__link');
-            Html::l('All events', '/Event/All', 'mdl-navigation__link');
+            Html::l('Articles', '/Article/Index', 'mdl-navigation__link');
+            Html::l('About', '/Home/About', 'mdl-navigation__link');
             if(\Context\Utils::IsLoggedIn()) {
-              Html::l('Users', '/User/Index', 'mdl-navigation__link');
+              Html::l('My articles', '/Article/All', 'mdl-navigation__link');
             }
+            if(\Context\Utils::IsAdmin()) {
+              Html::l('Admin', '/User/Index', 'mdl-navigation__link');
+          }
           ?>
         </nav>
       </div>

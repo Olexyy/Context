@@ -5,7 +5,7 @@ Html::mdlGrid();
     Html::l('Add article', '/Article/AddPage', 'mdl-navigation__link text-white');
   Html::mdlClose();
   Html::mdlCell(8);
-    Html::h2('Articles');
+    Html::h2('My articles');
   Html::mdlClose();
   if(empty($Model)) {
     Html::mdlCell(12);
