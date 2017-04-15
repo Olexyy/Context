@@ -1,7 +1,14 @@
 <?php
 $Model = $this->Model;
 Html::mdlGrid();
-  Html::mdlCell(12);
+  Html::mdlCell(2);
+    Html::l('All articles', '/Article/Index', 'mdl-navigation__link text-white');
+    echo '<br />';
+    if(\Context\Utils::IsLoggedIn()) {
+      Html::l('My articles', '/Article/All', 'mdl-navigation__link text-white');
+    }
+  Html::mdlClose();
+  Html::mdlCell(8);
     Html::h2('Article');
   Html::mdlClose();
   if(empty($Model)) {

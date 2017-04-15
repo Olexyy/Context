@@ -51,7 +51,7 @@
                 Html::l('My articles', '/Article/All', 'mdl-navigation__link');
               }
               if(\Context\Utils::IsAdmin()) {
-                Html::l('Users', '/User/Index', 'mdl-navigation__link');
+                Html::l('Admin', '/User/Index', 'mdl-navigation__link');
               }
             ?>
           </nav>
