@@ -12,7 +12,7 @@ class Comment extends Model {
 
   protected function SchemaDefinition() {
     parent::SchemaDefinition();
-    $this->AddField('Text', self::NVARCHAR, self::NOT_NULL);
+    $this->AddField('Text', self::BIG_NVARCHAR, self::NOT_NULL);
     $this->AddField('Article_Id', self::INT, self::NOT_NULL);
     $this->AddField('User_Id', self::INT, self::NOT_NULL);
     $this->AddField('Created', self::TEXT, self::NULL);

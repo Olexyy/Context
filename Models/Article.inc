@@ -14,7 +14,7 @@ class Article extends Model {
   protected function SchemaDefinition() {
     parent::SchemaDefinition();
     $this->AddField('Title', self::NVARCHAR, self::NOT_NULL);
-    $this->AddField('Description', self::NVARCHAR, self::NOT_NULL);
+    $this->AddField('Description', self::BIG_NVARCHAR, self::NOT_NULL);
     $this->AddField('User_Id', self::INT, self::NOT_NULL);
     $this->AddField('File_Id', self::INT, self::NULL);
     $this->AddField('Created', self::INT, self::NULL);

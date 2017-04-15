@@ -99,7 +99,7 @@ class Database {
     foreach ($model->Fields as $field) {
       if(!empty($model->{$field->Name})) {
         $fields .= " {$field->Name},";
-        if(stristr(Model::NVARCHAR, $field->Type)) {
+        if(stristr(Model::NVARCHAR, $field->Type) || stristr(Model::BIG_NVARCHAR, $field->Type) || stristr(Model::TEXT, $field->Type)) {
           $values .= " '{$model->{$field->Name}}',";
         }
         else {

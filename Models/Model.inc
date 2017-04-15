@@ -17,6 +17,7 @@ abstract class Model {
   const INT = 'INT';
   const TEXT = 'TEXT';
   const NVARCHAR = 'NVARCHAR(255)';
+  const BIG_NVARCHAR = 'NVARCHAR(8000)';
   const NULL = 'NULL';
   const NOT_NULL = 'NOT NULL';
 
